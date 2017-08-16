@@ -21,3 +21,140 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+//pages
+$widget-width: 80%;
+$font-family: arial;
+$widget-color: #fff;
+$control-width: $widget-width * .16;
+
+// confirm rating variables
+$confirm-rating-background-color: $widget-color;
+
+@mixin flex-center($direction:row) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin absolute-center($axis: both) {
+  position: absolute;
+  top:50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  @if $axis == vertical {
+    -webkit-transform: translate3d(0,-50%,0);
+    transform: translate3d(0,-50%,0);
+  } @else {
+    -webkit-transform: translate3d(-50%,0,0);
+    transform: translate3d(-50%,0,0);
+  }
+}
+
+.background {
+
+  background: url("../img/827.jpg");
+  background-size: cover;
+  //z-index: 1;
+}
+
+.rating-view {
+  //@include flex-center(column);
+  //align-items: flex-end;
+}
+
+// Dimensions
+#circular-rating-widget {
+  margin: 0 auto;
+  width: $widget-width;
+  .circle {
+    border-radius: 50%;
+  }
+
+
+  #circular-rating-control {
+    position: relative;
+    //background: #ccc;
+  }
+
+  #circular-rating-result{
+    position: absolute;
+    @include flex-center();
+    height: 100%;
+    width: 100%;
+  }
+
+  #circular-rating-track {
+    width: 100%;
+  }
+
+  #circular-rating-rate, #circular-rating-confirm {
+    width: #{$widget-width * .5}px;
+    height: #{$widget-width * .5}px;
+    text-align: center;
+  }
+
+
+  #circular-rating-confirm {
+    display: none;
+    background: $confirm-rating-background-color;
+  }
+  .hint, .rating-title {
+    color: $widget-color;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .rating-value {
+    font-size: 4.4rem;
+    color: $widget-color;
+  }
+
+  .hint {
+    font-family: arial;
+    font-weight: lighter;
+    font-size: 10px;
+    color: $widget-color;
+    padding: 0 0 16px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .start-button {
+    //fill: blue;
+  }
+}
+
+@keyframes grow {
+  0% {
+    transform: scale(1,1);
+  }
+  50% {
+    transform: scale(.9,.9);
+  }
+  100% {
+    transform: scale(1.02, 1.02);
+  }
+}
+
+.grow {
+  animation: grow .8s 2s infinite alternate ease-in-out;
+}
+
+
+#outer-transparent-path {
+  stroke-dasharray: 1500;
+  stroke-dashoffset: 1500;
+}
+
+@keyframes drawStroke {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.draw-stroke {
+  animation: drawStroke 2s ease-in forwards;
+
+}

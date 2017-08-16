@@ -1,17 +1,66 @@
 <ion-view view-title="Dashboard">
-  <ion-content class="padding">
-    <h2>Welcome to Ionic</h2>
-    <p>
-    This is the Ionic starter for tabs-based apps. For other starters and ready-made templates, check out the <a href="http://market.ionic.io/starters" target="_blank">Ionic Market</a>.
-    </p>
-    <p>
-      To edit the content of each tab, edit the corresponding template file in <code>www/templates/</code>. This template is <code>www/templates/tab-dash.html</code>
-    </p>
-    <p>
-    If you need help with your app, join the Ionic Community on the <a href="http://forum.ionicframework.com" target="_blank">Ionic Forum</a>. Make sure to <a href="http://twitter.com/ionicframework" target="_blank">follow us</a> on Twitter to get important updates and announcements for Ionic developers.
-    </p>
-    <p>
-      <b>Psst!</b> - Try <a href="http://view.ionic.io/">Ionic View</a> to easily share and test your app with clients and co-workers.
-    </p>
+  <ion-content class="padding background rating-view">
+    <!-- Add your site or application content here -->
+    <div id="circular-rating-widget">
+      <div id="circular-rating-control">
+        <!-- result -->
+        <div id="circular-rating-result">
+          <div id="circular-rating-rate" class="circle">
+            <p class="rating-title">your rating</p>
+            <p class="rating-value">5.0</p>
+          </div>
+          <div id="circular-rating-confirm" class="circle">
+            <p>confirm rating</p>
+            <p class="rating-value">5.0</p>
+            <div #id="rating-actions">
+              <button id="save-rating">
+                <span class="icon"></span>
+                <span>rate</span>
+              </button>
+
+              <button id="reset-rating">
+                <span class="icon"></span>
+                <span>re-do</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div id="circular-rating-track">
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
+<style type="text/css">
+    .st1{opacity:0.4;fill:none;stroke:#FFFFFF;stroke-width:50;stroke-linecap:round;stroke-miterlimit:10;}
+    .st2{fill:#FFFFFF;}
+    .st3{fill:none;stroke:#FFFFFF;stroke-width:4;stroke-miterlimit:10;}
+    .st4{fill:none;stroke:#FFFFFF;stroke-width:10;stroke-linecap:round;stroke-miterlimit:10;}
+</style>
+
+<path id="outer-transparent-path" class="st1 draw-stroke" d="M252.6,445.1c-1.1,0-2.2,0-3.3,0c-110.5,0-200-89.5-200-200s89.5-200,200-200s200,89.5,200,200
+	c0,65.2-31.2,123.1-79.4,159.6"/>
+
+            <!-- control -->
+<g id="rating-start-button">
+	<circle id="XMLID_9_" class="st2 start-button" cx="254" cy="443.4" r="43"></circle>
+	<circle id="XMLID_8_" class="st3 outer-circle" cx="254" cy="443.4" r="54">
+    </circle>
+</g>
+
+            <!-- track -->
+<g id="rating-track-head">
+	<circle id="XMLID_6_" class="st2 start-button" cx="254" cy="443.4" r="43"/>
+	<circle id="XMLID_5_" class="st3 outer-circle" cx="254" cy="443.4" r="54"/>
+</g>
+
+<path id="rating-track-seek" class="st4" d="M250.5,443.5c-110.5,0-200-89.5-200-200s89.5-200,200-200s200,89.5,200,200
+	c0,65.8-31.8,124.3-80.9,160.7"/>
+
+</svg>
+          <p class="hint">press and hold<br> to rate</p>
+        </div>
+      </div>
+
+
+
+    </div>
   </ion-content>
 </ion-view>
