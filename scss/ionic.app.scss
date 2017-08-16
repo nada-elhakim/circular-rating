@@ -179,7 +179,7 @@ $confirm-text-color: #666;
   text-transform: uppercase;
   p {margin: 0;line-height: 1.4;}
 }
-@keyframes grow {
+@keyframes puls {
   0% {
     transform: scale3d(1,1,1);
   }
@@ -191,7 +191,7 @@ $confirm-text-color: #666;
   }
 }
 
-.grow {
+.pulse {
   animation: grow .8s infinite alternate ease-in-out;
   transform-origin: center center;
 }
@@ -199,10 +199,12 @@ $confirm-text-color: #666;
 
 
 
-#outer-transparent-path {
+#transparent-track, #rating-track-seek {
   stroke-dasharray: 1500;
   stroke-dashoffset: 1500;
 }
+
+
 
 @keyframes drawStroke {
   to {
@@ -211,6 +213,5 @@ $confirm-text-color: #666;
 }
 
 .draw-stroke {
-  animation: drawStroke 2s ease-in forwards;
-
+  animation: drawStroke 1.2s ease-in forwards;
 }

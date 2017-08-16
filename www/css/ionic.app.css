@@ -9910,7 +9910,7 @@ a.button {
     margin: 0;
     line-height: 1.4; }
 
-@keyframes grow {
+@keyframes puls {
   0% {
     transform: scale3d(1, 1, 1); }
   50% {
@@ -9918,11 +9918,11 @@ a.button {
   100% {
     transform: scale3d(1.02, 1.02, 1.02); } }
 
-.grow {
+.pulse {
   animation: grow .8s infinite alternate ease-in-out;
   transform-origin: center center; }
 
-#outer-transparent-path {
+#transparent-track, #rating-track-seek {
   stroke-dasharray: 1500;
   stroke-dashoffset: 1500; }
 
@@ -9931,4 +9931,4 @@ a.button {
     stroke-dashoffset: 0; } }
 
 .draw-stroke {
-  animation: drawStroke 2s ease-in forwards; }
+  animation: drawStroke 1.2s ease-in forwards; }
