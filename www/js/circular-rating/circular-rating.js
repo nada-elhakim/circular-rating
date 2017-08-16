@@ -51,6 +51,8 @@
       this.ratingCircleEements =  this.getRatingElements();
       ionic.onGesture('hold', onHold, this.ratingCircleEements.control, {});
       ionic.onGesture('release', onRelease, this.ratingCircleEements.control, {});
+      ionic.onGesture('click', confirmRating, this.ratingCircleEements.confirmBtn, {});
+      ionic.onGesture('click', resetRating, this.ratingCircleEements.cancelBtn, {});
     }
 
     /**
@@ -67,8 +69,10 @@
         confirmationPop: document.getElementById('circular-rating-confirm'),
         ratingUpdatePop: document.getElementById('circular-rating-rate'),
         ratingValue: document.getElementById('rating-value'),
-        confirmBtn: document.getElementById('start-button'),
-        cancelBtn: document.getElementById('start-button'),
+
+        confirmBtn: document.getElementById('save-rating'),
+        cancelBtn: document.getElementById('reset-rating'),
+
         hintText: document.getElementById('hint-text'),
         ratingResultContainer: document.getElementById('circular-rating-result')
 
@@ -76,11 +80,11 @@
     }
 
     function confirmRating() {
-
+      console.log('confirm');
     }
 
     function resetRating() {
-
+      console.log('cancel');
     }
 
 
@@ -129,6 +133,7 @@
       //console.log(this.ratingCircleEements.confirmationPop);
       this.show(this.ratingCircleEements.confirmationPop);
       this.show(this.ratingCircleEements.ratingResultContainer);
+      this.show(this.ratingCircleEements.ratingTrack);
       this.ratingCircleEements.confirmationPop.classList.add('zoom-in');
     }
 
@@ -162,7 +167,7 @@
 
     }
     function removeAnimationClasses() {
-      this.ratingCircleEements.ratingTrack.classList.remove('draw-stroke');
+      //this.ratingCircleEements.ratingTrack.classList.remove('draw-stroke');
       //this.ratingCircleEements.confirmationPop.classList.remove('zoom-in');
       this.ratingCircleEements.transparentTrack.classList.remove('draw-stroke');
 

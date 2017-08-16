@@ -9944,4 +9944,24 @@ a.button {
 
 .zoom-in {
   transform-origin: center center;
-  animation: zoomIn .3s ease-in forwards; }
+  animation: zoomIn .2s ease-in forwards; }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+.fade-in {
+  animation: fadeIn .3s ease-in forwards; }
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 30%, 0); }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0); } }
+
+.slide-up {
+  animation: slideUp .3s ease-in forwards; }
