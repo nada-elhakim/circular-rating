@@ -35,6 +35,11 @@
     CircularRatingClass.prototype.startRating = startRating;
     CircularRatingClass.prototype.updateRating = updateRating;
     CircularRatingClass.prototype.hide = hide;
+    CircularRatingClass.prototype.show = show;
+    CircularRatingClass.prototype.removeAnimationClasses = removeAnimationClasses;
+    CircularRatingClass.prototype.addAnimationClasses = addAnimationClasses;
+    CircularRatingClass.prototype.showConfirmationPop = showConfirmationPop;
+
 
 
     function init() {
@@ -97,22 +102,21 @@
       // }, 1);
 
       context.initialOnHoldEvents();
-
       context.holdDuration = e.timeStamp;
-      console.log(context.holdDuration);
     }
 
     function onTransparentTrackDrawStrokeEnd() {
       console.log('on draw stroke end');
-      this.ratingCircleEements.ratingTrack.classList.add('draw-stroke');
+      context.ratingCircleEements.ratingTrack.classList.add('draw-stroke');
 
       // start  rating
     }
 
     function showConfirmationPop() {
       console.log('show confirmation pop');
-
-      this.ratingCircleEements.confirmationPop.classList.add('zoom-in');
+      console.log(this.ratingCircleEements.confirmationPop);
+      show(this.ratingCircleEements.confirmationPop);
+      //this.ratingCircleEements.confirmationPop.classList.add('zoom-in');
     }
 
 
@@ -131,18 +135,34 @@
      */
     function onRelease(e) {
       console.log('on release');
+      context.removeAnimationClasses();
       hide(context.ratingCircleEements.transparentTrack);
       hide(context.ratingCircleEements.resultUpdatePop);
       // Cancel time interval on button release
       if (context.ratingTimer) {
         clearInterval(context.ratingTimer);
       }
-      //showConfirmationPop();
+      context.showConfirmationPop();
+    }
+
+    function addAnimationClasses() {
+
+    }
+    function removeAnimationClasses() {
+      this.ratingCircleEements.ratingTrack.classList.remove('draw-stroke');
+      //this.ratingCircleEements.confirmationPop.classList.remove('zoom-in');
+      this.ratingCircleEements.transparentTrack.classList.remove('draw-stroke');
+
     }
 
     function hide(elem) {
       elem.style.display = 'none';
     }
+
+    function show(elem) {
+      elem.style.display = 'block';
+    }
+
 
 
     /**
