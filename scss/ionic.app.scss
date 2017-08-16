@@ -15,6 +15,7 @@ $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700');
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
@@ -23,7 +24,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 //pages
 $widget-width: 300;
-$font-family: arial;
+$widget-font: 'Montserrat', sans-serif;
 $widget-color: #fff;
 $control-width: $widget-width * .16;
 $text-transform: uppercase;
@@ -69,6 +70,7 @@ $confirm-text-color: #666;
 #circular-rating-widget {
   margin: 0 auto;
   width: #{$widget-width}px;
+  font-family: $widget-font;
   .circle {
     border-radius: 50%;
   }
@@ -78,7 +80,7 @@ $confirm-text-color: #666;
   }
 
   #rating-actions {
-    padding-top: #{$widget-width * .1}px;
+    padding-top: 18px;
     button {
       text-align: center;
       outline: none;
@@ -86,9 +88,8 @@ $confirm-text-color: #666;
       border: none;
       font-size: 10px;
       .icon {
+        margin: 0 0 4px;
         display: inline-block;
-        margin: 0;
-        margin-bottom: 8px;
         width: #{$widget-width * .1}px;
         height: #{$widget-width * .1}px;
         &.cancel {
@@ -136,7 +137,8 @@ $confirm-text-color: #666;
   #circular-rating-confirm {
     //display: none;
     p, span {color: $confirm-text-color;}
-    @include flex-center();
+    padding-top: 44px;
+    //@include flex-center();
     width: #{$widget-width * .7}px;
     height: #{$widget-width * .7}px;
     background: $confirm-rating-background-color;
@@ -148,12 +150,16 @@ $confirm-text-color: #666;
     text-transform: uppercase;
   }
 
+  .confirm-rating-title {
+    margin-bottom: 22px;
+  }
   .bold {
     font-weight: bold;
   }
 
   .rating-value {
     font-size: 4.4rem;
+    font-weight: lighter;
     color: $widget-color;
   }
 

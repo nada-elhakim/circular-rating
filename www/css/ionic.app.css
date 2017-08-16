@@ -15,6 +15,7 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,700");
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
@@ -9828,13 +9829,14 @@ a.button {
 
 #circular-rating-widget {
   margin: 0 auto;
-  width: 300px; }
+  width: 300px;
+  font-family: "Montserrat", sans-serif; }
   #circular-rating-widget .circle {
     border-radius: 50%; }
   #circular-rating-widget p, #circular-rating-widget span {
     text-transform: uppercase; }
   #circular-rating-widget #rating-actions {
-    padding-top: 30px; }
+    padding-top: 18px; }
     #circular-rating-widget #rating-actions button {
       text-align: center;
       outline: none;
@@ -9842,9 +9844,8 @@ a.button {
       border: none;
       font-size: 10px; }
       #circular-rating-widget #rating-actions button .icon {
+        margin: 0 0 4px;
         display: inline-block;
-        margin: 0;
-        margin-bottom: 8px;
         width: 30px;
         height: 30px;
         background-size: 30px !important; }
@@ -9879,10 +9880,7 @@ a.button {
       font-weight: bold;
       padding: 20px 0; }
   #circular-rating-widget #circular-rating-confirm {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    padding-top: 44px;
     width: 210px;
     height: 210px;
     background: #fff; }
@@ -9892,10 +9890,13 @@ a.button {
     color: #fff;
     text-align: center;
     text-transform: uppercase; }
+  #circular-rating-widget .confirm-rating-title {
+    margin-bottom: 22px; }
   #circular-rating-widget .bold {
     font-weight: bold; }
   #circular-rating-widget .rating-value {
     font-size: 4.4rem;
+    font-weight: lighter;
     color: #fff; }
 
 .hint {
