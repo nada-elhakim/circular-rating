@@ -9898,8 +9898,6 @@ a.button {
     font-size: 4.4rem;
     font-weight: lighter;
     color: #fff; }
-  #circular-rating-widget #circular-rating-result {
-    opacity: 0; }
   #circular-rating-widget .hint {
     font-family: arial;
     font-size: 10px;
@@ -9939,19 +9937,11 @@ a.button {
 @keyframes zoomIn {
   from {
     opacity: 0;
-    transform: scale3d(0, 0, 0); }
+    transform: translate3d(-50%, -52%, 0) scale3d(0.5, 0.5, 0.5); }
   to {
     opacity: 1;
-    transform: scale3d(1, 1, 1); } }
+    transform: translate3d(-50%, -52%, 0) scale3d(1, 1, 1); } }
 
 .zoom-in {
-  animation: zoomIn 1.2s ease-in forwards; }
-
-@keyframes fadeIn {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
-
-.fade-in {
-  animation: fadeIn 1s ease-in forwards; }
+  transform-origin: center center;
+  animation: zoomIn .3s ease-in forwards; }

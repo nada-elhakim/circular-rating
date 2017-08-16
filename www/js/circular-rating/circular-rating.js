@@ -39,6 +39,9 @@
     CircularRatingClass.prototype.removeAnimationClasses = removeAnimationClasses;
     CircularRatingClass.prototype.addAnimationClasses = addAnimationClasses;
     CircularRatingClass.prototype.showConfirmationPop = showConfirmationPop;
+    CircularRatingClass.prototype.confirmRating = confirmRating;
+    CircularRatingClass.prototype.resetRating = resetRating;
+
 
 
 
@@ -60,16 +63,25 @@
         controlOuterCircle: document.getElementById('button-outer-circle'),
         transparentTrack: document.getElementById('transparent-track'),
         ratingTrack: document.getElementById('rating-track-seek'),
+
         confirmationPop: document.getElementById('circular-rating-confirm'),
-        resultUpdatePop: document.getElementById('circular-rating-result'),
+        ratingUpdatePop: document.getElementById('circular-rating-rate'),
         ratingValue: document.getElementById('rating-value'),
         confirmBtn: document.getElementById('start-button'),
         cancelBtn: document.getElementById('start-button'),
-        hintText: document.getElementById('hint-text')
+        hintText: document.getElementById('hint-text'),
+        ratingResultContainer: document.getElementById('circular-rating-result')
 
       }
     }
 
+    function confirmRating() {
+
+    }
+
+    function resetRating() {
+
+    }
 
 
     /**
@@ -83,8 +95,8 @@
       this.ratingCircleEements.transparentTrack.classList.add('draw-stroke');
 
       this.ratingCircleEements.ratingValue.innerText = this.options.min;
-      this.ratingCircleEements.resultUpdatePop.style.display = 'block';
-      this.ratingCircleEements.resultUpdatePop.classList.add('fade-in');
+      this.ratingCircleEements.ratingUpdatePop.style.display = 'block';
+      this.ratingCircleEements.ratingUpdatePop.classList.add('fade-in');
 
       this.ratingCircleEements.hintText.style.opacity = 0;
       this.ratingCircleEements.transparentTrack.addEventListener("animationend", onTransparentTrackDrawStrokeEnd);
@@ -114,9 +126,10 @@
 
     function showConfirmationPop() {
       console.log('show confirmation pop');
-      console.log(this.ratingCircleEements.confirmationPop);
-      show(this.ratingCircleEements.confirmationPop);
-      //this.ratingCircleEements.confirmationPop.classList.add('zoom-in');
+      //console.log(this.ratingCircleEements.confirmationPop);
+      this.show(this.ratingCircleEements.confirmationPop);
+      this.show(this.ratingCircleEements.ratingResultContainer);
+      this.ratingCircleEements.confirmationPop.classList.add('zoom-in');
     }
 
 
@@ -136,8 +149,8 @@
     function onRelease(e) {
       console.log('on release');
       context.removeAnimationClasses();
-      hide(context.ratingCircleEements.transparentTrack);
-      hide(context.ratingCircleEements.resultUpdatePop);
+      context.hide(context.ratingCircleEements.transparentTrack);
+      context.hide(context.ratingCircleEements.ratingUpdatePop);
       // Cancel time interval on button release
       if (context.ratingTimer) {
         clearInterval(context.ratingTimer);
