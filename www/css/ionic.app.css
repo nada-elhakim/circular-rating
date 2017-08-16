@@ -9898,19 +9898,26 @@ a.button {
     font-size: 4.4rem;
     font-weight: lighter;
     color: #fff; }
+  #circular-rating-widget #circular-rating-result {
+    opacity: 0; }
+  #circular-rating-widget .hint {
+    font-family: arial;
+    font-size: 10px;
+    color: #fff;
+    padding: 0 0 16px;
+    text-align: center;
+    text-transform: uppercase; }
+    #circular-rating-widget .hint p {
+      margin: 0;
+      line-height: 1.4; }
+  #circular-rating-widget #transparent-track, #circular-rating-widget #rating-track-seek {
+    stroke-dasharray: 1500;
+    stroke-dashoffset: 1500; }
 
-.hint {
-  font-family: arial;
-  font-size: 10px;
-  color: #fff;
-  padding: 0 0 16px;
-  text-align: center;
-  text-transform: uppercase; }
-  .hint p {
-    margin: 0;
-    line-height: 1.4; }
-
-@keyframes puls {
+/**
+ Animations
+ */
+@keyframes pulse {
   0% {
     transform: scale3d(1, 1, 1); }
   50% {
@@ -9919,12 +9926,8 @@ a.button {
     transform: scale3d(1.02, 1.02, 1.02); } }
 
 .pulse {
-  animation: grow .8s infinite alternate ease-in-out;
+  animation: pulse .8s infinite alternate ease-in-out;
   transform-origin: center center; }
-
-#transparent-track, #rating-track-seek {
-  stroke-dasharray: 1500;
-  stroke-dashoffset: 1500; }
 
 @keyframes drawStroke {
   to {
@@ -9932,3 +9935,23 @@ a.button {
 
 .draw-stroke {
   animation: drawStroke 1.2s ease-in forwards; }
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale3d(0, 0, 0); }
+  to {
+    opacity: 1;
+    transform: scale3d(1, 1, 1); } }
+
+.zoom-in {
+  animation: zoomIn 1.2s ease-in forwards; }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+.fade-in {
+  animation: fadeIn 1s ease-in forwards; }

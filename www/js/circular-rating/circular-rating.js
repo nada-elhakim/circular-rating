@@ -1,18 +1,7 @@
 (function (window) {
-  // Global timer
-  window.ratingTimer;
-  var ratingCircleEements;
-
-  // To be added later from scope
-  var config = {
-    min: 5,
-    max: 10,
-    step: 1,
-  };
-
   circularRating.$inject = [];
   function circularRating() {
-
+    var context;
     /**
      * Angular directive link function
      * @param scope
@@ -20,11 +9,41 @@
      * @param attrs
      */
     function link(scope, elem, attrs) {
-      ratingCircleEements = getRatingElements();
-      ionic.onGesture('hold', onHold, ratingCircleEements.control, {});
-      ionic.onGesture('release', onRelease, ratingCircleEements.control, {});
+      new CircularRatingClass(elem, scope.options);
     }
 
+    function CircularRatingClass(options, elem) {
+      this.elem = elem;
+      this.ratingTimer;
+      this.ratingCircleEements;
+      this.holdDuration;
+      // To be added later from scope
+      this.options = {
+        min: 1,
+        max: 10,
+        step: 1,
+      };
+      // if(options){
+      //   this.options = options;
+      // }
+      this.init();
+    }
+
+    CircularRatingClass.prototype.init = init;
+    CircularRatingClass.prototype.getRatingElements = getRatingElements;
+    CircularRatingClass.prototype.initialOnHoldEvents = initialOnHoldEvents;
+    CircularRatingClass.prototype.startRating = startRating;
+    CircularRatingClass.prototype.updateRating = updateRating;
+    CircularRatingClass.prototype.hide = hide;
+
+
+    function init() {
+      context = this;
+      console.log('init');
+      this.ratingCircleEements =  this.getRatingElements();
+      ionic.onGesture('hold', onHold, this.ratingCircleEements.control, {});
+      ionic.onGesture('release', onRelease, this.ratingCircleEements.control, {});
+    }
 
     /**
      * Get circular rating elements
@@ -36,8 +55,9 @@
         controlOuterCircle: document.getElementById('button-outer-circle'),
         transparentTrack: document.getElementById('transparent-track'),
         ratingTrack: document.getElementById('rating-track-seek'),
-        confirmationPop: document.getElementById('start-button'),
-        ratingValue: document.getElementById('start-button'),
+        confirmationPop: document.getElementById('circular-rating-confirm'),
+        resultUpdatePop: document.getElementById('circular-rating-result'),
+        ratingValue: document.getElementById('rating-value'),
         confirmBtn: document.getElementById('start-button'),
         cancelBtn: document.getElementById('start-button'),
         hintText: document.getElementById('hint-text')
@@ -45,47 +65,64 @@
       }
     }
 
-    /**
-     * On hold event callback
-     * @param e
-     */
-    function onHold(e) {
-      console.log(e);
-      // set timer interval on button hold
-      window.ratingTimer = setInterval(function(){
-        console.log('timer');
-      }, 1);
 
-      initialOnHoldEvents();
-
-      var holdDuration = e.timeStamp;
-      console.log(holdDuration);
-    }
 
     /**
      * Initial on hold actions
      */
     function initialOnHoldEvents() {
       // show transparent seek
-      console.log(ratingCircleEements.transparentTrack);
-      ratingCircleEements.transparentTrack.classList.add('draw-stroke');
-      ratingCircleEements.hintText.style.opacity = 0;
-      ratingCircleEements.transparentTrack.addEventListener("animationend", onDrawStrokeEnd);
+      console.log('initial events');
+
+      console.log(this.ratingCircleEements.transparentTrack);
+      this.ratingCircleEements.transparentTrack.classList.add('draw-stroke');
+
+      this.ratingCircleEements.ratingValue.innerText = this.options.min;
+      this.ratingCircleEements.resultUpdatePop.style.display = 'block';
+      this.ratingCircleEements.resultUpdatePop.classList.add('fade-in');
+
+      this.ratingCircleEements.hintText.style.opacity = 0;
+      this.ratingCircleEements.transparentTrack.addEventListener("animationend", onTransparentTrackDrawStrokeEnd);
     }
 
-    function onDrawStrokeEnd() {
-      ratingCircleEements.ratingTrack.classList.add('draw-stroke');
+    /**
+     * On hold event callback
+     * @param e
+     */
+    function onHold(e) {
+      console.log('on hold event');
+      // set timer interval on button hold
+      // context.ratingTimer = setInterval(function(){
+      //   console.log('timer');
+      // }, 1);
+
+      context.initialOnHoldEvents();
+
+      context.holdDuration = e.timeStamp;
+      console.log(context.holdDuration);
+    }
+
+    function onTransparentTrackDrawStrokeEnd() {
+      console.log('on draw stroke end');
+      this.ratingCircleEements.ratingTrack.classList.add('draw-stroke');
 
       // start  rating
     }
 
     function showConfirmationPop() {
-      ratingCircleEements.confirmationPop.classList.add('');
+      console.log('show confirmation pop');
+
+      this.ratingCircleEements.confirmationPop.classList.add('zoom-in');
     }
 
 
     function startRating() {
-      config.min += config.step;
+      console.log('start rating');
+      this.options.min += this.options.step;
+    }
+
+    function updateRating() {
+      console.log('update rating');
     }
 
     /**
@@ -93,12 +130,20 @@
      * @param e
      */
     function onRelease(e) {
+      console.log('on release');
+      hide(context.ratingCircleEements.transparentTrack);
+      hide(context.ratingCircleEements.resultUpdatePop);
       // Cancel time interval on button release
-      if (window.ratingTimer) {
-        clearInterval(window.ratingTimer);
+      if (context.ratingTimer) {
+        clearInterval(context.ratingTimer);
       }
-      showConfirmationPop();
+      //showConfirmationPop();
     }
+
+    function hide(elem) {
+      elem.style.display = 'none';
+    }
+
 
     /**
      * Return angular directive definitions
@@ -107,7 +152,7 @@
       templateUrl: 'js/circular-rating/circular-rating.html',
       restrict: 'EA',
       scope: {
-
+        options: '='
       },
       link: link
     }
