@@ -22,7 +22,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "www/lib/ionic/scss/ionic";
 
 //pages
-$widget-width: 80%;
+$widget-width: 300;
 $font-family: arial;
 $widget-color: #fff;
 $control-width: $widget-width * .16;
@@ -41,15 +41,15 @@ $confirm-rating-background-color: $widget-color;
   position: absolute;
   top:50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-  @if $axis == vertical {
-    -webkit-transform: translate3d(0,-50%,0);
-    transform: translate3d(0,-50%,0);
-  } @else {
-    -webkit-transform: translate3d(-50%,0,0);
-    transform: translate3d(-50%,0,0);
-  }
+  -webkit-transform: translate(-50%,-70%);
+  transform: translate(-50%,-70%);
+  //@if $axis == vertical {
+  //  -webkit-transform: translate3d(0,-50%,0);
+  //  transform: translate3d(0,-50%,0);
+  //} @else {
+  //  -webkit-transform: translate3d(-50%,0,0);
+  //  transform: translate3d(-50%,0,0);
+  //}
 }
 
 .background {
@@ -60,14 +60,14 @@ $confirm-rating-background-color: $widget-color;
 }
 
 .rating-view {
-  //@include flex-center(column);
-  //align-items: flex-end;
+  @include flex-center(column);
+  justify-content: flex-end;
 }
 
 // Dimensions
 #circular-rating-widget {
   margin: 0 auto;
-  width: $widget-width;
+  width: #{$widget-width}px;
   .circle {
     border-radius: 50%;
   }
@@ -80,7 +80,7 @@ $confirm-rating-background-color: $widget-color;
 
   #circular-rating-result{
     position: absolute;
-    @include flex-center();
+    //@include flex-center();
     height: 100%;
     width: 100%;
   }
@@ -90,11 +90,20 @@ $confirm-rating-background-color: $widget-color;
   }
 
   #circular-rating-rate, #circular-rating-confirm {
+    @include absolute-center();
     width: #{$widget-width * .5}px;
     height: #{$widget-width * .5}px;
     text-align: center;
   }
 
+  #circular-rating-rate {
+    @include flex-center(column);
+    justify-content: flex-start;
+    p:first-child {
+      font-weight: bold;
+      padding: 20px 0;
+    }
+  }
 
   #circular-rating-confirm {
     display: none;
@@ -119,6 +128,7 @@ $confirm-rating-background-color: $widget-color;
     padding: 0 0 16px;
     text-align: center;
     text-transform: uppercase;
+    p {margin: 0;line-height: 1.4;}
   }
 
   .start-button {
@@ -128,18 +138,35 @@ $confirm-rating-background-color: $widget-color;
 
 @keyframes grow {
   0% {
-    transform: scale(1,1);
+    transform: scale(1);
   }
   50% {
-    transform: scale(.9,.9);
+    transform: scale(.9);
   }
   100% {
-    transform: scale(1.02, 1.02);
+    transform: scale(1.02);
   }
 }
 
 .grow {
   animation: grow .8s 2s infinite alternate ease-in-out;
+  transform-origin: center center;
+}
+
+@keyframes translate {
+  0% {
+    transform: translateX(200px);
+  }
+  50% {
+    transform: translateX(100px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+.translate {
+  animation: translate .8s 2s infinite alternate ease-in-out;
 }
 
 

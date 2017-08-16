@@ -9819,27 +9819,44 @@ a.button {
   background: url("../img/827.jpg");
   background-size: cover; }
 
+.rating-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-content: flex-end; }
+
 #circular-rating-widget {
   margin: 0 auto;
-  width: 80%; }
+  width: 300px; }
   #circular-rating-widget .circle {
     border-radius: 50%; }
   #circular-rating-widget #circular-rating-control {
     position: relative; }
   #circular-rating-widget #circular-rating-result {
     position: absolute;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
     height: 100%;
     width: 100%; }
   #circular-rating-widget #circular-rating-track {
     width: 100%; }
   #circular-rating-widget #circular-rating-rate, #circular-rating-widget #circular-rating-confirm {
-    width: 40%px;
-    height: 40%px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -70%);
+    transform: translate(-50%, -70%);
+    width: 150px;
+    height: 150px;
     text-align: center; }
+  #circular-rating-widget #circular-rating-rate {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: flex-start; }
+    #circular-rating-widget #circular-rating-rate p:first-child {
+      font-weight: bold;
+      padding: 20px 0; }
   #circular-rating-widget #circular-rating-confirm {
     display: none;
     background: #fff; }
@@ -9858,17 +9875,32 @@ a.button {
     padding: 0 0 16px;
     text-align: center;
     text-transform: uppercase; }
+    #circular-rating-widget .hint p {
+      margin: 0;
+      line-height: 1.4; }
 
 @keyframes grow {
   0% {
-    transform: scale(1, 1); }
+    transform: scale(1); }
   50% {
-    transform: scale(0.9, 0.9); }
+    transform: scale(0.9); }
   100% {
-    transform: scale(1.02, 1.02); } }
+    transform: scale(1.02); } }
 
 .grow {
-  animation: grow .8s 2s infinite alternate ease-in-out; }
+  animation: grow .8s 2s infinite alternate ease-in-out;
+  transform-origin: center center; }
+
+@keyframes translate {
+  0% {
+    transform: translateX(200px); }
+  50% {
+    transform: translateX(100px); }
+  100% {
+    transform: translateX(0px); } }
+
+.translate {
+  animation: translate .8s 2s infinite alternate ease-in-out; }
 
 #outer-transparent-path {
   stroke-dasharray: 1500;
