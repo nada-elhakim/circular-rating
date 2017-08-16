@@ -184,8 +184,8 @@ $confirm-text-color: #666;
   }
 
   #transparent-track, #rating-track-seek {
-    stroke-dasharray: 1500;
-    stroke-dashoffset: 1500;
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
   }
 
 }
@@ -223,7 +223,7 @@ $confirm-text-color: #666;
 }
 
 .draw-stroke {
-  animation: drawStroke 1.2s ease-in forwards;
+  animation: drawStroke 1s linear forwards;
 }
 
 
@@ -266,4 +266,18 @@ $confirm-text-color: #666;
 
 .slide-up {
   animation: slideUp .1s ease-in forwards;
+}
+
+@keyframes zoomInFadeOut {
+  from {
+    opacity: 1;
+    transform: translate3d(-50%, -53%,0) scale3d(0.5,0.5,0.5);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(-50%, -53%,0) scale3d(1.5,1.5,1.5);
+  }
+}
+.zoom-in-fade-out {
+  animation: zoomInFadeOut .3s ease-in forwards;
 }
