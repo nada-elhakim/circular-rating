@@ -14,9 +14,9 @@
 
     function CircularRatingClass(options, elem) {
       this.elem = elem;
-      this.ratingTimer;
-      this.ratingCircleEements;
-      this.holdDuration;
+      this.ratingTimer = 0;
+      this.ratingCircleEements = {};
+      this.holdDuration = 0;
       // To be added later from scope
       this.options = {
         min: 1,
@@ -41,6 +41,7 @@
     CircularRatingClass.prototype.showConfirmationPop = showConfirmationPop;
     CircularRatingClass.prototype.confirmRating = confirmRating;
     CircularRatingClass.prototype.resetRating = resetRating;
+    CircularRatingClass.prototype.hideRatingWidget = hideRatingWidget;
 
 
 
@@ -81,10 +82,14 @@
 
     function confirmRating() {
       console.log('confirm');
+      context.removeAnimationClasses();
+      context.hideRatingWidget();
     }
 
     function resetRating() {
       console.log('cancel');
+      context.removeAnimationClasses();
+      context.hideRatingWidget();
     }
 
 
@@ -135,6 +140,14 @@
       this.show(this.ratingCircleEements.ratingResultContainer);
       this.show(this.ratingCircleEements.ratingTrack);
       this.ratingCircleEements.confirmationPop.classList.add('zoom-in');
+      this.ratingCircleEements.confirmationPop.addEventListener("animationend", onShowConfirmation);
+    }
+
+    function onShowConfirmation() {
+      context.ratingCircleEements.cancelBtn.classList.add('slide-up');
+      context.ratingCircleEements.cancelBtn.addEventListener("animationend", function(){
+        context.ratingCircleEements.confirmBtn.classList.add('slide-up');
+      });
     }
 
 
@@ -179,6 +192,14 @@
 
     function show(elem) {
       elem.style.display = 'block';
+      elem.style.opacity = 1;
+    }
+
+    function hideRatingWidget() {
+      this.show(this.ratingCircleEements.hintText);
+      this.hide(this.ratingCircleEements.confirmationPop);
+      this.hide(this.ratingCircleEements.ratingResultContainer);
+      this.hide(this.ratingCircleEements.ratingTrack);
     }
 
 

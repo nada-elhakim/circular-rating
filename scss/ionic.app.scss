@@ -84,6 +84,7 @@ $confirm-text-color: #666;
     button {
       text-align: center;
       outline: none;
+      opacity: 0;
       background: transparent;
       border: none;
       font-size: 10px;
@@ -139,8 +140,8 @@ $confirm-text-color: #666;
     p, span {color: $confirm-text-color;}
     padding-top: 44px;
     //@include flex-center();
-    width: #{$widget-width * .7}px;
-    height: #{$widget-width * .7}px;
+    width: #{$widget-width * .68}px;
+    height: #{$widget-width * .68}px;
     background: $confirm-rating-background-color;
 
   }
@@ -229,11 +230,11 @@ $confirm-text-color: #666;
 @keyframes zoomIn {
   from {
     opacity: 0;
-    transform: translate3d(-50%, -52%,0) scale3d(0.5,0.5,0.5);
+    transform: translate3d(-50%, -53%,0) scale3d(0.5,0.5,0.5);
   }
   to {
     opacity: 1;
-    transform: translate3d(-50%, -52%,0) scale3d(1,1,1);
+    transform: translate3d(-50%, -53%,0) scale3d(1,1,1);
   }
 }
 
@@ -255,7 +256,7 @@ $confirm-text-color: #666;
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translate3d(0, 30%,0);
+    transform: translate3d(0, 20%,0);
   }
   to {
     opacity: 1;
@@ -264,5 +265,5 @@ $confirm-text-color: #666;
 }
 
 .slide-up {
-  animation: slideUp .3s ease-in forwards;
+  animation: slideUp .1s ease-in forwards;
 }

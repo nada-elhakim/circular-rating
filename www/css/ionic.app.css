@@ -9840,6 +9840,7 @@ a.button {
     #circular-rating-widget #rating-actions button {
       text-align: center;
       outline: none;
+      opacity: 0;
       background: transparent;
       border: none;
       font-size: 10px; }
@@ -9881,8 +9882,8 @@ a.button {
       padding: 20px 0; }
   #circular-rating-widget #circular-rating-confirm {
     padding-top: 44px;
-    width: 210px;
-    height: 210px;
+    width: 204px;
+    height: 204px;
     background: #fff; }
     #circular-rating-widget #circular-rating-confirm p, #circular-rating-widget #circular-rating-confirm span {
       color: #666; }
@@ -9937,10 +9938,10 @@ a.button {
 @keyframes zoomIn {
   from {
     opacity: 0;
-    transform: translate3d(-50%, -52%, 0) scale3d(0.5, 0.5, 0.5); }
+    transform: translate3d(-50%, -53%, 0) scale3d(0.5, 0.5, 0.5); }
   to {
     opacity: 1;
-    transform: translate3d(-50%, -52%, 0) scale3d(1, 1, 1); } }
+    transform: translate3d(-50%, -53%, 0) scale3d(1, 1, 1); } }
 
 .zoom-in {
   transform-origin: center center;
@@ -9958,10 +9959,10 @@ a.button {
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translate3d(0, 30%, 0); }
+    transform: translate3d(0, 20%, 0); }
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0); } }
 
 .slide-up {
-  animation: slideUp .3s ease-in forwards; }
+  animation: slideUp .1s ease-in forwards; }
