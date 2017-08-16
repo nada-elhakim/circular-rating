@@ -9831,6 +9831,27 @@ a.button {
   width: 300px; }
   #circular-rating-widget .circle {
     border-radius: 50%; }
+  #circular-rating-widget p, #circular-rating-widget span {
+    text-transform: uppercase; }
+  #circular-rating-widget #rating-actions {
+    padding-top: 30px; }
+    #circular-rating-widget #rating-actions button {
+      text-align: center;
+      outline: none;
+      background: transparent;
+      border: none;
+      font-size: 10px; }
+      #circular-rating-widget #rating-actions button .icon {
+        display: inline-block;
+        margin: 0;
+        margin-bottom: 8px;
+        width: 30px;
+        height: 30px;
+        background-size: 30px !important; }
+        #circular-rating-widget #rating-actions button .icon.cancel {
+          background: url("/img/cancel.svg") no-repeat; }
+        #circular-rating-widget #rating-actions button .icon.confirm {
+          background: url("/img/confirm.svg") no-repeat; }
   #circular-rating-widget #circular-rating-control {
     position: relative; }
   #circular-rating-widget #circular-rating-result {
@@ -9843,8 +9864,8 @@ a.button {
     position: absolute;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%, -70%);
-    transform: translate(-50%, -70%);
+    -webkit-transform: translate(-50%, -53%);
+    transform: translate(-50%, -53%);
     width: 150px;
     height: 150px;
     text-align: center; }
@@ -9858,49 +9879,48 @@ a.button {
       font-weight: bold;
       padding: 20px 0; }
   #circular-rating-widget #circular-rating-confirm {
-    display: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 210px;
+    height: 210px;
     background: #fff; }
-  #circular-rating-widget .hint, #circular-rating-widget .rating-title {
+    #circular-rating-widget #circular-rating-confirm p, #circular-rating-widget #circular-rating-confirm span {
+      color: #666; }
+  #circular-rating-widget .hint, #circular-rating-widget .rating-title, #circular-rating-widget .confirm-rating-title {
     color: #fff;
     text-align: center;
     text-transform: uppercase; }
+  #circular-rating-widget .bold {
+    font-weight: bold; }
   #circular-rating-widget .rating-value {
     font-size: 4.4rem;
     color: #fff; }
-  #circular-rating-widget .hint {
-    font-family: arial;
-    font-weight: lighter;
-    font-size: 10px;
-    color: #fff;
-    padding: 0 0 16px;
-    text-align: center;
-    text-transform: uppercase; }
-    #circular-rating-widget .hint p {
-      margin: 0;
-      line-height: 1.4; }
+
+.hint {
+  font-family: arial;
+  font-weight: lighter;
+  font-size: 10px;
+  color: #fff;
+  padding: 0 0 16px;
+  text-align: center;
+  text-transform: uppercase; }
+  .hint p {
+    margin: 0;
+    line-height: 1.4; }
 
 @keyframes grow {
   0% {
-    transform: scale(1); }
+    transform: scale3d(1, 1, 1); }
   50% {
-    transform: scale(0.9); }
+    transform: scale3d(0.9, 0.9, 0.9); }
   100% {
-    transform: scale(1.02); } }
+    transform: scale3d(1.02, 1.02, 1.02); } }
 
 .grow {
-  animation: grow .8s 2s infinite alternate ease-in-out;
+  animation: grow .8s infinite alternate ease-in-out;
   transform-origin: center center; }
-
-@keyframes translate {
-  0% {
-    transform: translateX(200px); }
-  50% {
-    transform: translateX(100px); }
-  100% {
-    transform: translateX(0px); } }
-
-.translate {
-  animation: translate .8s 2s infinite alternate ease-in-out; }
 
 #outer-transparent-path {
   stroke-dasharray: 1500;

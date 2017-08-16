@@ -26,9 +26,11 @@ $widget-width: 300;
 $font-family: arial;
 $widget-color: #fff;
 $control-width: $widget-width * .16;
+$text-transform: uppercase;
 
 // confirm rating variables
 $confirm-rating-background-color: $widget-color;
+$confirm-text-color: #666;
 
 @mixin flex-center($direction:row) {
   display: flex;
@@ -41,8 +43,8 @@ $confirm-rating-background-color: $widget-color;
   position: absolute;
   top:50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-70%);
-  transform: translate(-50%,-70%);
+  -webkit-transform: translate(-50%,-53%);
+  transform: translate(-50%,-53%);
   //@if $axis == vertical {
   //  -webkit-transform: translate3d(0,-50%,0);
   //  transform: translate3d(0,-50%,0);
@@ -53,7 +55,6 @@ $confirm-rating-background-color: $widget-color;
 }
 
 .background {
-
   background: url("../img/827.jpg");
   background-size: cover;
   //z-index: 1;
@@ -72,7 +73,34 @@ $confirm-rating-background-color: $widget-color;
     border-radius: 50%;
   }
 
+  p, span {
+    text-transform: $text-transform;
+  }
 
+  #rating-actions {
+    padding-top: #{$widget-width * .1}px;
+    button {
+      text-align: center;
+      outline: none;
+      background: transparent;
+      border: none;
+      font-size: 10px;
+      .icon {
+        display: inline-block;
+        margin: 0;
+        margin-bottom: 8px;
+        width: #{$widget-width * .1}px;
+        height: #{$widget-width * .1}px;
+        &.cancel {
+          background: url("/img/cancel.svg") no-repeat;
+        }
+        &.confirm {
+          background: url("/img/confirm.svg") no-repeat;
+        }
+        background-size: #{$widget-width * .1}px !important;
+      }
+    }
+  }
   #circular-rating-control {
     position: relative;
     //background: #ccc;
@@ -106,13 +134,22 @@ $confirm-rating-background-color: $widget-color;
   }
 
   #circular-rating-confirm {
-    display: none;
+    //display: none;
+    p, span {color: $confirm-text-color;}
+    @include flex-center();
+    width: #{$widget-width * .7}px;
+    height: #{$widget-width * .7}px;
     background: $confirm-rating-background-color;
+
   }
-  .hint, .rating-title {
+  .hint, .rating-title, .confirm-rating-title {
     color: $widget-color;
     text-align: center;
     text-transform: uppercase;
+  }
+
+  .bold {
+    font-weight: bold;
   }
 
   .rating-value {
@@ -120,54 +157,41 @@ $confirm-rating-background-color: $widget-color;
     color: $widget-color;
   }
 
-  .hint {
-    font-family: arial;
-    font-weight: lighter;
-    font-size: 10px;
-    color: $widget-color;
-    padding: 0 0 16px;
-    text-align: center;
-    text-transform: uppercase;
-    p {margin: 0;line-height: 1.4;}
-  }
 
   .start-button {
     //fill: blue;
   }
 }
 
+
+.hint {
+  font-family: arial;
+  font-weight: lighter;
+  font-size: 10px;
+  color: $widget-color;
+  padding: 0 0 16px;
+  text-align: center;
+  text-transform: uppercase;
+  p {margin: 0;line-height: 1.4;}
+}
 @keyframes grow {
   0% {
-    transform: scale(1);
+    transform: scale3d(1,1,1);
   }
   50% {
-    transform: scale(.9);
+    transform: scale3d(.9,.9,.9);
   }
   100% {
-    transform: scale(1.02);
+    transform: scale3d(1.02,1.02,1.02);
   }
 }
 
 .grow {
-  animation: grow .8s 2s infinite alternate ease-in-out;
+  animation: grow .8s infinite alternate ease-in-out;
   transform-origin: center center;
 }
 
-@keyframes translate {
-  0% {
-    transform: translateX(200px);
-  }
-  50% {
-    transform: translateX(100px);
-  }
-  100% {
-    transform: translateX(0px);
-  }
-}
 
-.translate {
-  animation: translate .8s 2s infinite alternate ease-in-out;
-}
 
 
 #outer-transparent-path {

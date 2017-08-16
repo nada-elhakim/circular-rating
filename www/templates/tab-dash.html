@@ -5,23 +5,24 @@
       <div id="circular-rating-control">
         <!-- result -->
         <div id="circular-rating-result">
-          <div id="circular-rating-rate" class="circle">
-            <p class="rating-title">your rating</p>
-            <p class="rating-value">5.0</p>
-          </div>
+          <!--<div id="circular-rating-rate" class="circle">-->
+            <!--<p class="rating-title bold">your rating</p>-->
+            <!--<p class="rating-value">5.0</p>-->
+          <!--</div>-->
           <div id="circular-rating-confirm" class="circle">
-            <p>confirm rating</p>
-            <p class="rating-value">5.0</p>
-            <div #id="rating-actions">
-              <button id="save-rating">
-                <span class="icon"></span>
-                <span>rate</span>
-              </button>
-
-              <button id="reset-rating">
-                <span class="icon"></span>
-                <span>re-do</span>
-              </button>
+            <div>
+              <p class="confirm-rating-title bold">confirm rating?</p>
+              <p class="rating-value">5.0</p>
+              <div id="rating-actions">
+                <button id="reset-rating">
+                  <p class="icon cancel"></p>
+                  <p class="bold">re-do</p>
+                </button>
+                <button id="save-rating">
+                  <p class="icon confirm"></p>
+                  <p class="bold">rate</p>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -35,11 +36,11 @@
     .st4{fill:none;stroke:#FFFFFF;stroke-width:10;stroke-linecap:round;stroke-miterlimit:10;}
 </style>
 
-<path id="outer-transparent-path" class="st1 draw-stroke" d="M252.6,445.1c-1.1,0-2.2,0-3.3,0c-110.5,0-200-89.5-200-200s89.5-200,200-200s200,89.5,200,200
-	c0,65.2-31.2,123.1-79.4,159.6"/>
+<!--<path id="outer-transparent-path" class="st1 draw-stroke" d="M252.6,445.1c-1.1,0-2.2,0-3.3,0c-110.5,0-200-89.5-200-200s89.5-200,200-200s200,89.5,200,200-->
+	<!--c0,65.2-31.2,123.1-79.4,159.6"/>-->
 
             <!-- control -->
-<g id="rating-start-button">
+<g id="rating-control-button">
 	<circle id="XMLID_9_" class="st2 start-button" cx="254" cy="443.4" r="43"></circle>
 	<circle id="XMLID_8_" class="st3 outer-circle grow" cx="254" cy="443.4" r="54">
     </circle>
@@ -51,17 +52,17 @@
 	<!--<circle id="XMLID_5_" class="st3 outer-circle" cx="254" cy="443.4" r="54"/>-->
 <!--</g>-->
 
-<!--<path id="rating-track-seek" class="st4" d="M250.5,443.5c-110.5,0-200-89.5-200-200s89.5-200,200-200s200,89.5,200,200-->
-	<!--c0,65.8-31.8,124.3-80.9,160.7"/>-->
+<path id="rating-track-seek" class="st4" d="M250.5,443.5c-110.5,0-200-89.5-200-200s89.5-200,200-200s200,89.5,200,200
+	c0,65.8-31.8,124.3-80.9,160.7"/>
 
 </svg>
-          <div class="hint">
-            <p>press and hold</p><p> to rate</p></div>
-        </div>
+
       </div>
-
-
-
+        </div>
     </div>
+
+
+    <div class="hint">
+      <p>press and hold</p><p> to rate</p></div>
   </ion-content>
 </ion-view>
