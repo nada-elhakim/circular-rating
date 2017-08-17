@@ -188,6 +188,10 @@ $confirm-text-color: #666;
     stroke-dasharray: 1200;
     stroke-dashoffset: 1200;
   }
+
+  #rating-track-seek {
+    transition: all .3s linear;
+  }
 }
 
 

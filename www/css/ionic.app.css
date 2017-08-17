@@ -9913,6 +9913,8 @@ a.button {
   #circular-rating-widget #transparent-track {
     stroke-dasharray: 1200;
     stroke-dashoffset: 1200; }
+  #circular-rating-widget #rating-track-seek {
+    transition: all .3s linear; }
 
 /**
  Animations
