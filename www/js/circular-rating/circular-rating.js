@@ -1,7 +1,7 @@
 (function () {
   circularRating.$inject = [];
   function circularRating() {
-    var context;
+    var context, holdCounter;
     /**
      * Angular directive link function
      * @param scope
@@ -111,23 +111,7 @@
       context.hide(context.ratingCircleEements.ratingResultContainer);
       context.show(context.ratingCircleEements.hintText);
       context.hideRatingWidget();
-
-      // context.show(context.ratingCircleEements.ratingResultContainer);
-      // //context.show(context.ratingCircleEements.ratingUpdatePop);
-      // context.show(context.ratingCircleEements.hintText);
-      // //context.ratingCircleEements.ratingUpdatePop.classList.add('zoom-in-fade-out');
-      // context.hide(context.ratingCircleEements.confirmationPop);
-      //
-      // context.ratingCircleEements.ratingUpdatePop.addEventListener('animationend', function () {
-      //   console.log('rating popup');
-      //
-      //   context.ratingCircleEements.ratingUpdatePop.classList.remove('zoom-in-fade-out');
-      //   context.hide(context.ratingCircleEements.ratingUpdatePop);
-      //   context.hide(context.ratingCircleEements.ratingUpdatePop);
-      //
-      //   context.hide(context.ratingCircleEements.ratingResultContainer);
-      //   context.hideRatingWidget();
-      // });
+      context.resetRating();
     }
 
     /**
@@ -142,16 +126,8 @@
     }
 
     function resetTrack() {
-      console.log('reseting track');
       this.startingValue = this.options.min;
-      this.ratingCircleEements.ratingTrack
-      console.log(this.totalTrackPathLength);
-      //this.trackOffsetAnimation.reverse();
-      //this.ratingCircleEements.ratingTrack.style.strokeDashoffset = this.totalTrackPathLength;
-      // this.ratingCircleEements.ratingTrack.animate({
-      //     strokeDashOffset: [this.strokeDashOffset, this.totalTrackPathLength]
-      // },{duration:100, fill:'forwards'});
-      console.log(this.ratingCircleEements.ratingTrack.style.strokeDashoffset);
+      this.ratingCircleEements.ratingTrack.style.strokeDashoffset = this.totalTrackPathLength;
     }
 
     /**
@@ -182,10 +158,8 @@
      * @param e
      */
     function onHold(e) {
-      setTimeout(function () {
-        context.initialOnHoldEvents();
-      }, 10);
-
+      console.log('hold');
+      context.initialOnHoldEvents();
     }
 
     /**
@@ -200,11 +174,8 @@
      * Show confirmation popup
      */
     function showConfirmationPop() {
-      //console.log(this.ratingCircleEements.confirmationPop);
-      //this.hide(this.ratingCircleEements.transparentTrack);
-      this.show(this.ratingCircleEements.confirmationPop);
       this.show(this.ratingCircleEements.ratingResultContainer);
-      //this.show(this.ratingCircleEements.ratingTrack);
+      this.show(this.ratingCircleEements.confirmationPop);
       this.ratingCircleEements.confirmationPop.classList.add('zoom-in');
       this.ratingCircleEements.confirmationPop.addEventListener("animationend", onShowConfirmation);
     }
@@ -223,13 +194,13 @@
      * Update rating value
      */
     function updateRating() {
+      console.log('updating');
       this.ratingTimer = setInterval(function () {
         var ratingContainers = [].slice.call(document.getElementsByClassName('rating-value')),
           percentage;
         if (context.startingValue < context.options.max) {
           context.startingValue += context.options.step;
           percentage = ((1 - context.startingValue / context.options.max));
-          //context.ratingCircleEements.ratingTrack.classList.add('draw-stroke');
           context.updateRatingTrack(context.ratingCircleEements.ratingTrack, percentage);
         }
         if(ratingContainers.length > 0) {
@@ -244,14 +215,8 @@
 
     function updateRatingTrack(track, percentage) {
       // get last offset
-      //console.log(this.totalTrackPathLength);
       var targetPathLength = this.totalTrackPathLength * percentage;
-      //console.log(targetPathLength);
-      // console.log(this.trackOffset);
-      // //console.log(this.totalTrackPathLength * percentage);
-      // this.trackOffset = this.trackOffset - 100;
       animate();
-
       // cancel this animation
       var animation;
       function animate() {
@@ -267,23 +232,6 @@
       //   return;
       // }
       track.style.strokeDashoffset = this.trackOffset;
-      // this.trackOffsetAnimation  = track.animate({
-      //   strokeDashoffset: [this.totalTrackPathLength, this.totalTrackPathLength * percentage]
-      // }, {
-      //   duration: context.options.interval,
-      //   //fill: 'forwards'
-      // });
-
-      // this.trackOffsetAnimation.onfinish = function(){
-      //   console.log('finished');
-      //   track.style.strokeDashoffset = context.totalTrackPathLength;
-      //   context.trackOffsetAnimation.cancel();
-      // }
-        // console.log('animation finished');
-        //   context.currentrackPathLength = context.totalTrackPathLength * percentage;
-        //   console.log(context.currentrackPathLength);
-        //  };
-      //track.style.strokeDashoffset = this.totalTrackPathLength * percentage;
     }
 
     /**
