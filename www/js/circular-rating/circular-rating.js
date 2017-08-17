@@ -118,10 +118,8 @@
       context.startingValue = context.options.min;
       context.removeAnimationClasses();
       context.hide(context.ratingCircleEements.ratingResultContainer);
-      context.hide(context.ratingCircleEements.ratingUpdatePop);
-      //context.ratingCircleEements.ratingUpdatePop.classList.add('zoom-in-fade-out');
+      context.ratingCircleEements.ratingUpdatePop.classList.add('zoom-in-fade-out');
       context.show(context.ratingCircleEements.hintText);
-      //context.ratingCircleEements.svgContainer.style.zIndex = 200000;
       context.resetRating();
     }
 
@@ -132,8 +130,9 @@
       context.removeAnimationClasses();
       context.resetTrack();
       context.hide(context.ratingCircleEements.ratingResultContainer);
-      context.show(context.ratingCircleEements.hintText);
       context.hide(context.ratingCircleEements.ratingUpdatePop);
+      context.show(context.ratingCircleEements.hintText);
+      context.ratingCircleEements.ratingTitle.style.opacity = 0;
       context.hideConfirmationPop();
     }
 
@@ -176,7 +175,6 @@
       context.showRatingResultContainer();
       context.updateRating();
       context.ratingCircleEements.controlOuterCircle.classList.remove('pulse');
-
       //context.ratingCircleEements.ratingTrack.classList.add('draw-stroke');
     }
 
@@ -195,12 +193,11 @@
      * On rating confirmation
      */
     function onShowConfirmation() {
-
       context.ratingCircleEements.cancelBtn.classList.add('slide-up');
       context.ratingCircleEements.cancelBtn.addEventListener("animationend", function(){
         context.ratingCircleEements.confirmBtn.classList.add('slide-up');
         context.ratingCircleEements.transparentTrack.classList.remove('draw-stroke');
-        context.hide(this.ratingCircleEements.transparentTrack);
+        context.hide(context.ratingCircleEements.transparentTrack);
       });
     }
 

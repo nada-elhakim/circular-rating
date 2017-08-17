@@ -107,6 +107,7 @@ $confirm-text-color: #666;
     }
   }
   #circular-rating-control {
+    //perspective: 600px;
     position: relative;
     //background: #ccc;
   }
@@ -183,7 +184,6 @@ $confirm-text-color: #666;
   }
 
   .hint {
-    font-family: arial;
     font-size: 10px;
     color: $widget-color;
     padding: 0 0 16px;
@@ -192,7 +192,7 @@ $confirm-text-color: #666;
     p {margin: 0;line-height: 1.4;}
   }
 
-  #transparent-track{
+  #transparent-track, #rating-track-seek {
     stroke-dasharray: 1200;
     stroke-dashoffset: 1200;
   }
@@ -337,27 +337,33 @@ $confirm-text-color: #666;
 @keyframes zoomInFadeOut {
   from {
     opacity: 1;
-    font-size: 1rem;
+    transform: translate3d(-50%, -53%,0) scale(0.8);
+    //font-size: 1rem;
+    //transform: translate3d(0,0,20);
+
   }
   to {
     opacity: 0;
-    font-size: 4rem;
+    //transform: translate3d(0,0,0);
+    //font-size: 4rem;
+    transform: translate3d(-50%, -53%,0) scale(2);
+
   }
 }
 
 @-webkit-keyframes zoomInFadeOut {
   from {
     opacity: 1;
-    font-size: 1rem;
+    //transform: translateZ(20px);
   }
   to {
     opacity: 0;
-    font-size: 4rem;
+    //transform: translateZ(200px);
   }
 }
 .zoom-in-fade-out {
-  -webkit-animation: zoomInFadeOut .5s ease-in forwards;
-  animation: zoomInFadeOut .5s ease-in forwards;
+  -webkit-animation: zoomInFadeOut 1s ease-out forwards;
+  animation: zoomInFadeOut 1s ease-out forwards;
 }
 
 
