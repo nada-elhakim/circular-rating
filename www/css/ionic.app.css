@@ -9851,9 +9851,9 @@ a.button {
         height: 30px;
         background-size: 30px !important; }
         #circular-rating-widget #rating-actions button .icon.cancel {
-          background: url("/img/cancel.svg") no-repeat; }
+          background: url("../img/cancel.svg") no-repeat; }
         #circular-rating-widget #rating-actions button .icon.confirm {
-          background: url("/img/confirm.svg") no-repeat; }
+          background: url("../img/confirm.svg") no-repeat; }
   #circular-rating-widget #circular-rating-control {
     position: relative; }
   #circular-rating-widget #circular-rating-result {
@@ -9872,6 +9872,7 @@ a.button {
     height: 150px;
     text-align: center; }
   #circular-rating-widget #circular-rating-rate {
+    opacity: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9909,7 +9910,7 @@ a.button {
     #circular-rating-widget .hint p {
       margin: 0;
       line-height: 1.4; }
-  #circular-rating-widget #transparent-track, #circular-rating-widget #rating-track-seek {
+  #circular-rating-widget #transparent-track {
     stroke-dasharray: 1200;
     stroke-dashoffset: 1200; }
 
@@ -9933,7 +9934,7 @@ a.button {
     stroke-dashoffset: 0; } }
 
 .draw-stroke {
-  animation: drawStroke 1s linear forwards; }
+  animation: drawStroke .5s linear forwards; }
 
 @keyframes zoomIn {
   from {
@@ -9969,10 +9970,8 @@ a.button {
 
 @keyframes zoomInFadeOut {
   from {
-    opacity: 1;
     transform: translate3d(-50%, -53%, 0) scale3d(0.5, 0.5, 0.5); }
   to {
-    opacity: 0;
     transform: translate3d(-50%, -53%, 0) scale3d(1.5, 1.5, 1.5); } }
 
 .zoom-in-fade-out {

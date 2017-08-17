@@ -94,10 +94,10 @@ $confirm-text-color: #666;
         width: #{$widget-width * .1}px;
         height: #{$widget-width * .1}px;
         &.cancel {
-          background: url("/img/cancel.svg") no-repeat;
+          background: url("../img/cancel.svg") no-repeat;
         }
         &.confirm {
-          background: url("/img/confirm.svg") no-repeat;
+          background: url("../img/confirm.svg") no-repeat;
         }
         background-size: #{$widget-width * .1}px !important;
       }
@@ -127,6 +127,7 @@ $confirm-text-color: #666;
   }
 
   #circular-rating-rate {
+    opacity: 1;
     @include flex-center(column);
     justify-content: flex-start;
     p:first-child {
@@ -183,11 +184,10 @@ $confirm-text-color: #666;
     p {margin: 0;line-height: 1.4;}
   }
 
-  #transparent-track, #rating-track-seek {
+  #transparent-track {
     stroke-dasharray: 1200;
     stroke-dashoffset: 1200;
   }
-
 }
 
 
@@ -223,7 +223,7 @@ $confirm-text-color: #666;
 }
 
 .draw-stroke {
-  animation: drawStroke 1s linear forwards;
+  animation: drawStroke .5s linear forwards;
 }
 
 
@@ -270,11 +270,11 @@ $confirm-text-color: #666;
 
 @keyframes zoomInFadeOut {
   from {
-    opacity: 1;
+    //opacity: 1;
     transform: translate3d(-50%, -53%,0) scale3d(0.5,0.5,0.5);
   }
   to {
-    opacity: 0;
+   // opacity: 0;
     transform: translate3d(-50%, -53%,0) scale3d(1.5,1.5,1.5);
   }
 }
