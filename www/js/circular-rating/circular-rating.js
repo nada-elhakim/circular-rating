@@ -148,10 +148,8 @@
      * Initial on hold actions
      */
     function initialOnHoldEvents() {
+      this.ratingCircleEements.transparentTrack.classList.add('draw-stroke');
       this.ratingCircleEements.transparentTrack.addEventListener("animationend", onTransparentTrackDrawStrokeEnd);
-      context.ratingCircleEements.controlOuterCircle.classList.remove('pulse');
-      context.showRatingResultContainer();
-      context.updateRating();
     }
 
     function showRatingResultContainer() {
@@ -175,6 +173,10 @@
      * On transparent track animation end
      */
     function onTransparentTrackDrawStrokeEnd() {
+      context.showRatingResultContainer();
+      context.updateRating();
+      context.ratingCircleEements.controlOuterCircle.classList.remove('pulse');
+
       //context.ratingCircleEements.ratingTrack.classList.add('draw-stroke');
     }
 
@@ -193,9 +195,12 @@
      * On rating confirmation
      */
     function onShowConfirmation() {
+
       context.ratingCircleEements.cancelBtn.classList.add('slide-up');
       context.ratingCircleEements.cancelBtn.addEventListener("animationend", function(){
         context.ratingCircleEements.confirmBtn.classList.add('slide-up');
+        context.ratingCircleEements.transparentTrack.classList.remove('draw-stroke');
+        context.hide(this.ratingCircleEements.transparentTrack);
       });
     }
 
