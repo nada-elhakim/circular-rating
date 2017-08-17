@@ -93,9 +93,10 @@
         controlOuterCircle: document.getElementById('button-outer-circle'),
         transparentTrack: document.getElementById('transparent-track'),
         ratingTrack: document.getElementById('rating-track-seek'),
+        ratingTitle:  document.getElementById('popup-rating-title'),
         ratingUpdatePop: document.getElementById('circular-rating-rate'),
         ratingTrackHead: document.getElementById('rating-track-head'),
-        headCircles: document.querySelectorAll('#rating-track-head circle:first-child'),
+        headCircles: document.querySelectorAll('#rating-track-head circle'),
         ratingValue: document.getElementById('rating-value'),
         ratingValueContainers: document.getElementsByClassName('rating-value'),
         confirmationPop: document.getElementById('circular-rating-confirm'),
@@ -117,12 +118,11 @@
       context.startingValue = context.options.min;
       context.removeAnimationClasses();
       context.hide(context.ratingCircleEements.ratingResultContainer);
-      ///context.show(context.ratingCircleEements.ratingUpdatePop);
-      context.ratingCircleEements.ratingUpdatePop.classList.add('zoom-in-fade-out');
+      context.hide(context.ratingCircleEements.ratingUpdatePop);
+      //context.ratingCircleEements.ratingUpdatePop.classList.add('zoom-in-fade-out');
       context.show(context.ratingCircleEements.hintText);
-      context.hideConfirmationPop();
       //context.ratingCircleEements.svgContainer.style.zIndex = 200000;
-      //context.resetRating();
+      context.resetRating();
     }
 
     /**
@@ -133,13 +133,14 @@
       context.resetTrack();
       context.hide(context.ratingCircleEements.ratingResultContainer);
       context.show(context.ratingCircleEements.hintText);
+      context.hide(context.ratingCircleEements.ratingUpdatePop);
       context.hideConfirmationPop();
     }
 
     function resetTrack() {
       this.startingValue = this.options.min;
       this.ratingCircleEements.ratingTrack.style.strokeDashoffset = this.totalTrackPathLength;
-      this.updateHead(this.headCoord);
+      //this.updateHead(this.headCoord);
 
     }
 
@@ -154,10 +155,10 @@
     }
 
     function showRatingResultContainer() {
-      this.show(this.ratingCircleEements.ratingResultContainer);
+      //this.show(this.ratingCircleEements.ratingResultContainer);
       this.show(this.ratingCircleEements.ratingUpdatePop);
       this.ratingCircleEements.ratingValue.innerText = this.startingValue;
-      this.ratingCircleEements.ratingUpdatePop.classList.add('fade-in');
+      //this.ratingCircleEements.ratingUpdatePop.classList.add('fade-in');
       this.ratingCircleEements.hintText.style.opacity = 0;
     }
 
@@ -233,7 +234,7 @@
       function animate() {
         console.log('animate');
         context.trackOffset = targetPathLength;
-        context.updateHead(endpoint);
+        //context.updateHead(endpoint);
         context.animation= setTimeout(function(){
           animate();
         },context.options.interval);
@@ -332,7 +333,7 @@
      */
     function getFinalRating() {
       this.show(this.ratingCircleEements.ratingResultContainer);
-      this.show(this.ratingCircleEements.ratingUpdatePop);
+      //this.show(this.ratingCircleEements.ratingUpdatePop);
       this.ratingCircleEements.ratingUpdatePop.addEventListener("animationend", function(){
         context.hide(context.ratingCircleEements.ratingResultContainer);
       });

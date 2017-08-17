@@ -8,7 +8,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/css/ionic.app.min.css" afterPath="$PROJECT_DIR$/www/css/ionic.app.min.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/circular-rating/circular-rating.html" afterPath="$PROJECT_DIR$/www/js/circular-rating/circular-rating.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/circular-rating/circular-rating.js" afterPath="$PROJECT_DIR$/www/js/circular-rating/circular-rating.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/templates/tab-dash.html" afterPath="$PROJECT_DIR$/www/templates/tab-dash.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,11 +22,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ionic.app.scss" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ionic.app.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scss/ionic.app.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="197" column="3" lean-forward="false" selection-start-line="197" selection-start-column="3" selection-end-line="197" selection-end-column="3" />
+            <state relative-caret-position="145">
+              <caret line="131" column="25" lean-forward="true" selection-start-line="131" selection-start-column="25" selection-end-line="131" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -36,8 +35,8 @@
       <file leaf-file-name="circular-rating.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/circular-rating/circular-rating.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="55" column="38" lean-forward="true" selection-start-line="55" selection-start-column="38" selection-end-line="55" selection-end-column="51" />
+            <state relative-caret-position="75">
+              <caret line="5" column="10" lean-forward="false" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
               <folding>
                 <element signature="n#style#0;n#svg#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
@@ -45,14 +44,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="circular-rating.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="circular-rating.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/js/circular-rating/circular-rating.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
-              <caret line="118" column="6" lean-forward="false" selection-start-line="118" selection-start-column="6" selection-end-line="118" selection-end-column="6" />
+            <state relative-caret-position="315">
+              <caret line="135" column="64" lean-forward="false" selection-start-line="135" selection-start-column="64" selection-end-line="135" selection-end-column="64" />
               <folding>
-                <element signature="e#7136#7441#0" expanded="false" />
-                <element signature="e#7523#7774#0" expanded="false" />
+                <element signature="e#7224#7529#0" expanded="false" />
+                <element signature="e#7611#7862#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -72,15 +71,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>startRating</find>
-      <find>transpa</find>
-      <find>transparentTrack</find>
-      <find>context</find>
-      <find>circular-rating-rate</find>
-      <find>ratingTrack</find>
-      <find>updateRatingTrack</find>
-      <find>confirm</find>
-      <find>rating-track-seek</find>
       <find>cancel</find>
       <find>.ba</find>
       <find>updateRatingT</find>
@@ -102,6 +92,15 @@
       <find>transition</find>
       <find>hideRatingWidget</find>
       <find>start-button</find>
+      <find>parseIn</find>
+      <find>ratingResultContainer</find>
+      <find>hideConfirmationPop</find>
+      <find>parse</find>
+      <find>updateHe</find>
+      <find>circular-rating-rate</find>
+      <find>initia</find>
+      <find>showRatingResultContainer</find>
+      <find>ratingUpdatePop</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -127,9 +126,9 @@
         <option value="$PROJECT_DIR$/www/js/app.js" />
         <option value="$PROJECT_DIR$/www/js/controllers.js" />
         <option value="$PROJECT_DIR$/www/templates/tab-dash.html" />
-        <option value="$PROJECT_DIR$/www/js/circular-rating/circular-rating.js" />
         <option value="$PROJECT_DIR$/www/js/circular-rating/circular-rating.html" />
         <option value="$PROJECT_DIR$/scss/ionic.app.scss" />
+        <option value="$PROJECT_DIR$/www/js/circular-rating/circular-rating.js" />
       </list>
     </option>
   </component>
@@ -396,12 +395,12 @@
       <updated>1502868456565</updated>
       <workItem from="1502868457765" duration="37165000" />
       <workItem from="1502919819311" duration="5288000" />
-      <workItem from="1502947956145" duration="28539000" />
+      <workItem from="1502947956145" duration="30511000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70992000" />
+    <option name="totallyTimeSpent" value="72964000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="782" extended-state="6" />
@@ -471,8 +470,8 @@
         <state relative-caret-position="1425">
           <caret line="95" column="6" lean-forward="false" selection-start-line="95" selection-start-column="6" selection-end-line="95" selection-end-column="6" />
           <folding>
-            <element signature="e#7136#7441#0" expanded="false" />
-            <element signature="e#7523#7774#0" expanded="false" />
+            <element signature="e#7224#7529#0" expanded="false" />
+            <element signature="e#7611#7862#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -500,8 +499,8 @@
         <state relative-caret-position="3915">
           <caret line="261" column="0" lean-forward="false" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
           <folding>
-            <element signature="e#7136#7441#0" expanded="false" />
-            <element signature="e#7523#7774#0" expanded="false" />
+            <element signature="e#7224#7529#0" expanded="false" />
+            <element signature="e#7611#7862#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -595,32 +594,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/circular-rating/circular-rating.js">
+    <entry file="file://$PROJECT_DIR$/scss/ionic.app.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="118" column="6" lean-forward="false" selection-start-line="118" selection-start-column="6" selection-end-line="118" selection-end-column="6" />
-          <folding>
-            <element signature="e#7136#7441#0" expanded="false" />
-            <element signature="e#7523#7774#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="145">
+          <caret line="131" column="25" lean-forward="true" selection-start-line="131" selection-start-column="25" selection-end-line="131" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/circular-rating/circular-rating.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="55" column="38" lean-forward="true" selection-start-line="55" selection-start-column="38" selection-end-line="55" selection-end-column="51" />
+        <state relative-caret-position="75">
+          <caret line="5" column="10" lean-forward="false" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
           <folding>
             <element signature="n#style#0;n#svg#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scss/ionic.app.scss">
+    <entry file="file://$PROJECT_DIR$/www/js/circular-rating/circular-rating.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="197" column="3" lean-forward="false" selection-start-line="197" selection-start-column="3" selection-end-line="197" selection-end-column="3" />
-          <folding />
+        <state relative-caret-position="315">
+          <caret line="135" column="64" lean-forward="false" selection-start-line="135" selection-start-column="64" selection-end-line="135" selection-end-column="64" />
+          <folding>
+            <element signature="e#7224#7529#0" expanded="false" />
+            <element signature="e#7611#7862#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

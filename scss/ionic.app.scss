@@ -130,13 +130,18 @@ $confirm-text-color: #666;
   }
 
   #circular-rating-rate {
-    opacity: 1;
-    @include flex-center(column);
-    justify-content: flex-start;
-    p:first-child {
-      font-weight: bold;
-      padding: 20px 0;
+    & > div {
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+      @include flex-center(column);
+      justify-content: flex-start;
+      p:first-child {
+        font-weight: bold;
+        padding: 20px 0;
+      }
     }
+
   }
 
   #circular-rating-confirm {
@@ -331,42 +336,31 @@ $confirm-text-color: #666;
 
 @keyframes zoomInFadeOut {
   from {
-    //opacity: 1;
-    transform: translate3d(-50%, -53%,0) scale3d(0.5,0.5,0.5);
+    opacity: 1;
+    font-size: 1rem;
   }
   to {
-   // opacity: 0;
-    transform: translate3d(-50%, -53%,0) scale3d(1.5,1.5,1.5);
+    opacity: 0;
+    font-size: 4rem;
   }
 }
 
 @-webkit-keyframes zoomInFadeOut {
   from {
-    //opacity: 1;
-    -webkit-transform: translate3d(-50%, -53%,0) scale3d(0.5,0.5,0.5);
-    transform: translate3d(-50%, -53%,0) scale3d(0.5,0.5,0.5);
+    opacity: 1;
+    font-size: 1rem;
   }
   to {
-    // opacity: 0;
-    -webkit-transform: translate3d(-50%, -53%,0) scale3d(1.5,1.5,1.5);
-    transform: translate3d(-50%, -53%,0) scale3d(1.5,1.5,1.5);
+    opacity: 0;
+    font-size: 4rem;
   }
 }
 .zoom-in-fade-out {
-  -webkit-animation: zoomInFadeOut .1s ease-in forwards;
-  animation: zoomInFadeOut .1s ease-in forwards;
+  -webkit-animation: zoomInFadeOut .5s ease-in forwards;
+  animation: zoomInFadeOut .5s ease-in forwards;
 }
 
-@keyframes zoomInFadeOut {
-  from {
-    //opacity: 1;
-    transform: translate3d(-50%, -53%,0) scale3d(0.5,0.5,0.5);
-  }
-  to {
-    // opacity: 0;
-    transform: translate3d(-50%, -53%,0) scale3d(1.5,1.5,1.5);
-  }
-}
+
 
 @-webkit-keyframes shrink {
   from {

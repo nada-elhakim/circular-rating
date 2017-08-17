@@ -9871,14 +9871,16 @@ a.button {
     width: 150px;
     height: 150px;
     text-align: center; }
-  #circular-rating-widget #circular-rating-rate {
+  #circular-rating-widget #circular-rating-rate > div {
+    width: 100%;
+    height: 100%;
     opacity: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     justify-content: flex-start; }
-    #circular-rating-widget #circular-rating-rate p:first-child {
+    #circular-rating-widget #circular-rating-rate > div p:first-child {
       font-weight: bold;
       padding: 20px 0; }
   #circular-rating-widget #circular-rating-confirm {
@@ -10012,27 +10014,23 @@ a.button {
 
 @keyframes zoomInFadeOut {
   from {
-    transform: translate3d(-50%, -53%, 0) scale3d(0.5, 0.5, 0.5); }
+    opacity: 1;
+    font-size: 1rem; }
   to {
-    transform: translate3d(-50%, -53%, 0) scale3d(1.5, 1.5, 1.5); } }
+    opacity: 0;
+    font-size: 4rem; } }
 
 @-webkit-keyframes zoomInFadeOut {
   from {
-    -webkit-transform: translate3d(-50%, -53%, 0) scale3d(0.5, 0.5, 0.5);
-    transform: translate3d(-50%, -53%, 0) scale3d(0.5, 0.5, 0.5); }
+    opacity: 1;
+    font-size: 1rem; }
   to {
-    -webkit-transform: translate3d(-50%, -53%, 0) scale3d(1.5, 1.5, 1.5);
-    transform: translate3d(-50%, -53%, 0) scale3d(1.5, 1.5, 1.5); } }
+    opacity: 0;
+    font-size: 4rem; } }
 
 .zoom-in-fade-out {
-  -webkit-animation: zoomInFadeOut .1s ease-in forwards;
-  animation: zoomInFadeOut .1s ease-in forwards; }
-
-@keyframes zoomInFadeOut {
-  from {
-    transform: translate3d(-50%, -53%, 0) scale3d(0.5, 0.5, 0.5); }
-  to {
-    transform: translate3d(-50%, -53%, 0) scale3d(1.5, 1.5, 1.5); } }
+  -webkit-animation: zoomInFadeOut .5s ease-in forwards;
+  animation: zoomInFadeOut .5s ease-in forwards; }
 
 @-webkit-keyframes shrink {
   from {
