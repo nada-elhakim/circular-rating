@@ -55,27 +55,7 @@ $confirm-text-color: #666;
   //}
 }
 
-@mixin transition($declarations...) {
-  @each $prefix in '-webkit-', '-moz-', '-ms-', '-o-', '' {
-    #{$prefix}transition: $declarations;
-  }
-}
 
-@mixin keyframes($declarations...) {
-  @each $prefix in '@-webkit-', '@-moz-', '@-ms-', '@-o-', '' {
-    #{$prefix}keyframes {
-    $declarations;
-   }
-  }
-}
-
-@mixin animation($declarations...) {
-  @each $prefix in '-webkit-', '-moz-', '-ms-', '-o-', '' {
-    #{$prefix}keyframes {
-      $declarations;
-    }
-  }
-}
 
 
 .background {
@@ -236,20 +216,19 @@ $confirm-text-color: #666;
     transform: scale3d(1.02,1.02,1.02);
   }
 }
-)
+
 
 @keyframes pulse {
-      0% {
-        transform: scale3d(1,1,1);
-      }
-      50% {
-        transform: scale3d(.9,.9,.9);
-      }
-      100% {
-        transform: scale3d(1.02,1.02,1.02);
-      }
+    0% {
+      transform: scale3d(1,1,1);
     }
-)
+    50% {
+      transform: scale3d(.9,.9,.9);
+    }
+    100% {
+      transform: scale3d(1.02,1.02,1.02);
+    }
+}
 
 .pulse {
   -webkit-animation: pulse .8s infinite alternate ease-in-out;
@@ -376,4 +355,32 @@ $confirm-text-color: #666;
 .zoom-in-fade-out {
   -webkit-animation: zoomInFadeOut .1s ease-in forwards;
   animation: zoomInFadeOut .1s ease-in forwards;
+}
+
+@keyframes zoomInFadeOut {
+  from {
+    //opacity: 1;
+    transform: translate3d(-50%, -53%,0) scale3d(0.5,0.5,0.5);
+  }
+  to {
+    // opacity: 0;
+    transform: translate3d(-50%, -53%,0) scale3d(1.5,1.5,1.5);
+  }
+}
+
+@-webkit-keyframes shrink {
+  from {
+    opacity: 1;
+    -webkit-transform: scale3d(1,1,1);
+    transform: scale3d(1,1,1);
+  }
+  to {
+    opacity: 0;
+    -webkit-transform: scale3d(0.5,0.5,0.5);
+    transform: scale3d(0.5,0.5,0.5);
+  }
+}
+.shrink {
+  -webkit-animation: shrink .5s ease-in forwards;
+  animation: shrink .1s ease-in forwards;
 }

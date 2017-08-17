@@ -29,7 +29,7 @@
       this.options = {
         min: 1,
         max: 10,
-        interval: 100,
+        interval: 150,
         step: 1,
       };
       this.startingValue = this.options.min;
@@ -50,7 +50,7 @@
     CircularRatingClass.prototype.showConfirmationPop = showConfirmationPop;
     CircularRatingClass.prototype.confirmRating = confirmRating;
     CircularRatingClass.prototype.resetRating = resetRating;
-    CircularRatingClass.prototype.hideRatingWidget = hideRatingWidget;
+    CircularRatingClass.prototype.hideConfirmationPop = hideConfirmationPop;
     CircularRatingClass.prototype.getFinalRating = getFinalRating;
     CircularRatingClass.prototype.updateText = updateText;
     CircularRatingClass.prototype.showRatingResultContainer = showRatingResultContainer;
@@ -76,11 +76,6 @@
         x: this.ratingCircleEements.control.getAttribute("cx"),
         y: this.ratingCircleEements.control.getAttribute("cy")
       };
-
-      console.log(this.headCoord);
-      // ionic.onGesture('touch', function(){
-      //   context.ratingCircleEements.transparentTrack.classList.add('draw-stroke');
-      // }, this.ratingCircleEements.control, {});
       ionic.onGesture('hold', onHold, this.ratingCircleEements.control, {});
       ionic.onGesture('release', onRelease, context.ratingCircleEements.control, {});
       ionic.onGesture('click', confirmRating, this.ratingCircleEements.confirmBtn, {});
@@ -93,13 +88,14 @@
      */
     function  getRatingElements() {
       return {
+        svgContainer: document.getElementById('circular-rating-track'),
         control: document.getElementById('start-button'),
         controlOuterCircle: document.getElementById('button-outer-circle'),
         transparentTrack: document.getElementById('transparent-track'),
         ratingTrack: document.getElementById('rating-track-seek'),
         ratingUpdatePop: document.getElementById('circular-rating-rate'),
         ratingTrackHead: document.getElementById('rating-track-head'),
-        headCircles: document.querySelectorAll('#rating-track-head circle'),
+        headCircles: document.querySelectorAll('#rating-track-head circle:first-child'),
         ratingValue: document.getElementById('rating-value'),
         ratingValueContainers: document.getElementsByClassName('rating-value'),
         confirmationPop: document.getElementById('circular-rating-confirm'),
@@ -121,9 +117,12 @@
       context.startingValue = context.options.min;
       context.removeAnimationClasses();
       context.hide(context.ratingCircleEements.ratingResultContainer);
+      ///context.show(context.ratingCircleEements.ratingUpdatePop);
+      context.ratingCircleEements.ratingUpdatePop.classList.add('zoom-in-fade-out');
       context.show(context.ratingCircleEements.hintText);
-      context.hideRatingWidget();
-      context.resetRating();
+      context.hideConfirmationPop();
+      //context.ratingCircleEements.svgContainer.style.zIndex = 200000;
+      //context.resetRating();
     }
 
     /**
@@ -134,7 +133,7 @@
       context.resetTrack();
       context.hide(context.ratingCircleEements.ratingResultContainer);
       context.show(context.ratingCircleEements.hintText);
-      context.hideRatingWidget();
+      context.hideConfirmationPop();
     }
 
     function resetTrack() {
@@ -152,12 +151,6 @@
       context.ratingCircleEements.controlOuterCircle.classList.remove('pulse');
       context.showRatingResultContainer();
       context.updateRating();
-      // this.trackOffsetAnimation  = this.ratingCircleEements.ratingTrack.animate({
-      //   strokeDashoffset: [this.totalTrackPathLength, this.totalTrackPathLength * .5]
-      // }, {
-      //   duration: 500,
-      //   fill: 'forwards'
-      // });
     }
 
     function showRatingResultContainer() {
@@ -314,10 +307,14 @@
     /**
      * Hide the rating widget
      */
-    function hideRatingWidget() {
+    function hideConfirmationPop() {
       this.hide(this.ratingCircleEements.confirmationPop);
       //this.hide(this.ratingCircleEements.ratingResultContainer);
       //this.hide(this.ratingCircleEements.ratingTrack);
+    }
+
+    function resizeCircle(circle, percentage) {
+      circle.setAttribute("r", parseInt(circle.getAttribue("r")) * percentage);
     }
 
 

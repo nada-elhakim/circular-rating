@@ -9913,13 +9913,21 @@ a.button {
   #circular-rating-widget #transparent-track {
     stroke-dasharray: 1200;
     stroke-dashoffset: 1200; }
-  #circular-rating-widget #rating-track-seek {
-    -webkit-transition: stroke-dashoffset .3s linear;
-    transition: stroke-dashoffset .3s linear; }
+  #circular-rating-widget #rating-track-seek, #circular-rating-widget #rating-track-head circle {
+    -webkit-transition: all .3s linear;
+    transition: all .3s linear; }
 
 /**
  Animations
  */
+@-webkit-keyframes pulse {
+  0% {
+    transform: scale3d(1, 1, 1); }
+  50% {
+    transform: scale3d(0.9, 0.9, 0.9); }
+  100% {
+    transform: scale3d(1.02, 1.02, 1.02); } }
+
 @keyframes pulse {
   0% {
     transform: scale3d(1, 1, 1); }
@@ -9929,14 +9937,21 @@ a.button {
     transform: scale3d(1.02, 1.02, 1.02); } }
 
 .pulse {
+  -webkit-animation: pulse .8s infinite alternate ease-in-out;
   animation: pulse .8s infinite alternate ease-in-out;
+  -webkit-transform-origin: center center;
   transform-origin: center center; }
 
 @keyframes drawStroke {
   to {
     stroke-dashoffset: 0; } }
 
+@-webkit-keyframes drawStroke {
+  to {
+    stroke-dashoffset: 0; } }
+
 .draw-stroke {
+  -webkit-animation: drawStroke .5s linear forwards;
   animation: drawStroke .5s linear forwards; }
 
 @keyframes zoomIn {
@@ -9947,8 +9962,20 @@ a.button {
     opacity: 1;
     transform: translate3d(-50%, -53%, 0) scale3d(1, 1, 1); } }
 
+@-webkit-keyframes zoomIn {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(-50%, -53%, 0) scale3d(0.5, 0.5, 0.5);
+    transform: translate3d(-50%, -53%, 0) scale3d(0.5, 0.5, 0.5); }
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(-50%, -53%, 0) scale3d(1, 1, 1);
+    transform: translate3d(-50%, -53%, 0) scale3d(0.5, 0.5, 0.5); } }
+
 .zoom-in {
+  -webkit-transform-origin: center center;
   transform-origin: center center;
+  -webkit-animation: zoomIn .2s ease-in forwards;
   animation: zoomIn .2s ease-in forwards; }
 
 @keyframes fadeIn {
@@ -9958,6 +9985,7 @@ a.button {
     opacity: 1; } }
 
 .fade-in {
+  -webkit-animation: fadeIn .3s ease-in forwards;
   animation: fadeIn .3s ease-in forwards; }
 
 @keyframes slideUp {
@@ -9968,7 +9996,18 @@ a.button {
     opacity: 1;
     transform: translate3d(0, 0, 0); } }
 
+@-webkit-keyframes slideUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 20%, 0);
+    transform: translate3d(0, 20%, 0); }
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 20%, 0);
+    transform: translate3d(0, 0, 0); } }
+
 .slide-up {
+  -webkit-animation: slideUp .1s ease-in forwards;
   animation: slideUp .1s ease-in forwards; }
 
 @keyframes zoomInFadeOut {
@@ -9977,5 +10016,34 @@ a.button {
   to {
     transform: translate3d(-50%, -53%, 0) scale3d(1.5, 1.5, 1.5); } }
 
+@-webkit-keyframes zoomInFadeOut {
+  from {
+    -webkit-transform: translate3d(-50%, -53%, 0) scale3d(0.5, 0.5, 0.5);
+    transform: translate3d(-50%, -53%, 0) scale3d(0.5, 0.5, 0.5); }
+  to {
+    -webkit-transform: translate3d(-50%, -53%, 0) scale3d(1.5, 1.5, 1.5);
+    transform: translate3d(-50%, -53%, 0) scale3d(1.5, 1.5, 1.5); } }
+
 .zoom-in-fade-out {
-  animation: zoomInFadeOut .3s ease-in forwards; }
+  -webkit-animation: zoomInFadeOut .1s ease-in forwards;
+  animation: zoomInFadeOut .1s ease-in forwards; }
+
+@keyframes zoomInFadeOut {
+  from {
+    transform: translate3d(-50%, -53%, 0) scale3d(0.5, 0.5, 0.5); }
+  to {
+    transform: translate3d(-50%, -53%, 0) scale3d(1.5, 1.5, 1.5); } }
+
+@-webkit-keyframes shrink {
+  from {
+    opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1); }
+  to {
+    opacity: 0;
+    -webkit-transform: scale3d(0.5, 0.5, 0.5);
+    transform: scale3d(0.5, 0.5, 0.5); } }
+
+.shrink {
+  -webkit-animation: shrink .5s ease-in forwards;
+  animation: shrink .1s ease-in forwards; }
