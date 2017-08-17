@@ -212,7 +212,7 @@ $confirm-text-color: #666;
     stroke-dashoffset: 1200;
   }
 
-  #rating-track-seek {
+  #rating-track-seek, #rating-track-head circle {
     -webkit-transition: all .3s linear;
     transition: all .3s linear;
   }
@@ -374,6 +374,6 @@ $confirm-text-color: #666;
   }
 }
 .zoom-in-fade-out {
-  -webkit-animation: zoomInFadeOut .3s ease-in forwards;
-  animation: zoomInFadeOut .3s ease-in forwards;
+  -webkit-animation: zoomInFadeOut .1s ease-in forwards;
+  animation: zoomInFadeOut .1s ease-in forwards;
 }

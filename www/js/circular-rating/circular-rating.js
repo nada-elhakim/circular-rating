@@ -15,12 +15,14 @@
     function CircularRatingClass(elem, scope) {
       this.elem = elem;
       this.ratingTimer = 0;
+      this.animation = 0;
       this.ratingCircleEements = {};
       this.holdDuration = 0;
       this.totalTrackPathLength = this.currentrackPathLength = 0;
       this.trackOffset = 0;
       this.trackDashArray = 0;
       this.scope = scope;
+      this.headCoord = {};
       //console.log(scope);
       this.trackOffsetAnimation = null;
       // To be added later from scope
@@ -55,6 +57,7 @@
     CircularRatingClass.prototype.prepareTrackPath = prepareTrackPath;
     CircularRatingClass.prototype.updateRatingTrack = updateRatingTrack;
     CircularRatingClass.prototype.resetTrack = resetTrack;
+    CircularRatingClass.prototype.updateHead = updateHead;
 
 
 
@@ -69,6 +72,12 @@
       context = this;
       this.ratingCircleEements =  this.getRatingElements();
       this.prepareTrackPath(this.ratingCircleEements.ratingTrack);
+      this.headCoord =  {
+        x: this.ratingCircleEements.control.getAttribute("cx"),
+        y: this.ratingCircleEements.control.getAttribute("cy")
+      };
+
+      console.log(this.headCoord);
       // ionic.onGesture('touch', function(){
       //   context.ratingCircleEements.transparentTrack.classList.add('draw-stroke');
       // }, this.ratingCircleEements.control, {});
@@ -89,13 +98,16 @@
         transparentTrack: document.getElementById('transparent-track'),
         ratingTrack: document.getElementById('rating-track-seek'),
         ratingUpdatePop: document.getElementById('circular-rating-rate'),
+        ratingTrackHead: document.getElementById('rating-track-head'),
+        headCircles: document.querySelectorAll('#rating-track-head circle'),
         ratingValue: document.getElementById('rating-value'),
         ratingValueContainers: document.getElementsByClassName('rating-value'),
         confirmationPop: document.getElementById('circular-rating-confirm'),
         confirmBtn: document.getElementById('save-rating'),
         cancelBtn: document.getElementById('reset-rating'),
         hintText: document.getElementById('hint-text'),
-        ratingResultContainer: document.getElementById('circular-rating-result')
+        ratingResultContainer: document.getElementById('circular-rating-result'),
+
       }
     }
 
@@ -128,6 +140,8 @@
     function resetTrack() {
       this.startingValue = this.options.min;
       this.ratingCircleEements.ratingTrack.style.strokeDashoffset = this.totalTrackPathLength;
+      this.updateHead(this.headCoord);
+
     }
 
     /**
@@ -135,6 +149,7 @@
      */
     function initialOnHoldEvents() {
       this.ratingCircleEements.transparentTrack.addEventListener("animationend", onTransparentTrackDrawStrokeEnd);
+      context.ratingCircleEements.controlOuterCircle.classList.remove('pulse');
       context.showRatingResultContainer();
       context.updateRating();
       // this.trackOffsetAnimation  = this.ratingCircleEements.ratingTrack.animate({
@@ -215,16 +230,21 @@
 
     function updateRatingTrack(track, percentage) {
       // get last offset
-      var targetPathLength = this.totalTrackPathLength * percentage;
+      var targetPathLength = this.totalTrackPathLength * percentage,
+          endpoint = track.getPointAtLength(this.totalTrackPathLength * (1 - percentage));
+
+      console.log(endpoint);
       animate();
+
       // cancel this animation
-      var animation;
       function animate() {
-        //console.log('animate');
+        console.log('animate');
         context.trackOffset = targetPathLength;
-        animation= setTimeout(function(){
+        context.updateHead(endpoint);
+        context.animation= setTimeout(function(){
           animate();
         },context.options.interval);
+        clearTimeout(context.animation);
       }
 
       // console.log(this.trackOffset);
@@ -234,6 +254,15 @@
       track.style.strokeDashoffset = this.trackOffset;
     }
 
+    function updateHead(endpoint) {
+      [].slice.call(this.ratingCircleEements.headCircles).forEach(function (circle) {
+        circle.setAttribute("cx", endpoint.x);
+        //circle.style.transform = "translate(" + endpoint.x + "px," + endpoint.y + "px)";
+        circle.setAttribute("cy", endpoint.y);
+      });
+
+    }
+
     /**
      * On release event callback
      * @param e
@@ -241,6 +270,10 @@
     function onRelease(e) {
       //context.hide(context.ratingCircleEements.transparentTrack);
       // Cancel time interval on button release
+      if (context.animation) {
+        clearTimeout(context.animation);
+      }
+
       if (context.ratingTimer) {
         clearInterval(context.ratingTimer);
         // pass value to scope here
