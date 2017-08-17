@@ -16,6 +16,7 @@
       this.elem = elem;
       this.ratingTimer = 0;
       this.animation = 0;
+      this.beginRating = false;
       this.ratingCircleEements = {};
       this.holdDuration = 0;
       this.totalTrackPathLength = this.currentrackPathLength = 0;
@@ -27,10 +28,10 @@
       this.trackOffsetAnimation = null;
       // To be added later from scope
       this.options = {
-        min: 1,
+        min: 0.5,
         max: 10,
-        interval: 150,
-        step: 1,
+        interval: 250,
+        step: 0.5,
       };
       this.startingValue = this.options.min;
       // if(options){
@@ -49,7 +50,7 @@
     CircularRatingClass.prototype.addAnimationClasses = addAnimationClasses;
     CircularRatingClass.prototype.showConfirmationPop = showConfirmationPop;
     CircularRatingClass.prototype.confirmRating = confirmRating;
-    CircularRatingClass.prototype.resetRating = resetRating;
+    CircularRatingClass.prototype.cancelRating = cancelRating;
     CircularRatingClass.prototype.hideConfirmationPop = hideConfirmationPop;
     CircularRatingClass.prototype.getFinalRating = getFinalRating;
     CircularRatingClass.prototype.updateText = updateText;
@@ -58,6 +59,7 @@
     CircularRatingClass.prototype.updateRatingTrack = updateRatingTrack;
     CircularRatingClass.prototype.resetTrack = resetTrack;
     CircularRatingClass.prototype.updateHead = updateHead;
+    CircularRatingClass.prototype.resetWidget = resetWidget;
 
 
 
@@ -76,10 +78,11 @@
         x: this.ratingCircleEements.control.getAttribute("cx"),
         y: this.ratingCircleEements.control.getAttribute("cy")
       };
+      context.scope.ratingModel = context.options.min;
       ionic.onGesture('hold', onHold, this.ratingCircleEements.control, {});
       ionic.onGesture('release', onRelease, context.ratingCircleEements.control, {});
       ionic.onGesture('click', confirmRating, this.ratingCircleEements.confirmBtn, {});
-      ionic.onGesture('click', resetRating, this.ratingCircleEements.cancelBtn, {});
+      ionic.onGesture('click', cancelRating, this.ratingCircleEements.cancelBtn, {});
     }
 
     /**
@@ -120,20 +123,33 @@
       context.hide(context.ratingCircleEements.ratingResultContainer);
       context.ratingCircleEements.ratingUpdatePop.classList.add('zoom-in-fade-out');
       context.show(context.ratingCircleEements.hintText);
-      context.resetRating();
+      context.ratingCircleEements.ratingTitle.style.opacity = 0;
+      context.resetWidget();
+      context.ratingCircleEements.ratingUpdatePop.addEventListener("animationend", function () {
+        context.hide(context.ratingCircleEements.ratingUpdatePop);
+        context.ratingCircleEements.ratingUpdatePop.classList.remove('zoom-in-fade-out');
+      });
+
+    }
+
+    function resetWidget() {
+      context.hideConfirmationPop();
+      context.removeAnimationClasses();
+      context.resetTrack();
+      context.show(context.ratingCircleEements.hintText);
+      context.hide(context.ratingCircleEements.ratingResultContainer);
+      context.ratingCircleEements.controlOuterCircle.classList.add('pulse');
+
     }
 
     /**
      * Cancel the rating
      */
-    function resetRating() {
-      context.removeAnimationClasses();
-      context.resetTrack();
-      context.hide(context.ratingCircleEements.ratingResultContainer);
+    function cancelRating() {
+      context.scope.ratingModel = context.options.min;
+      context.scope.$apply();
       context.hide(context.ratingCircleEements.ratingUpdatePop);
-      context.show(context.ratingCircleEements.hintText);
-      context.ratingCircleEements.ratingTitle.style.opacity = 0;
-      context.hideConfirmationPop();
+      context.resetWidget();
     }
 
     function resetTrack() {
@@ -154,9 +170,8 @@
     function showRatingResultContainer() {
       //this.show(this.ratingCircleEements.ratingResultContainer);
       this.show(this.ratingCircleEements.ratingUpdatePop);
+      this.show(this.ratingCircleEements.transparentTrack);
       this.ratingCircleEements.ratingValue.innerText = this.startingValue;
-      //this.ratingCircleEements.ratingUpdatePop.classList.add('fade-in');
-      this.ratingCircleEements.hintText.style.opacity = 0;
     }
 
     /**
@@ -174,6 +189,7 @@
     function onTransparentTrackDrawStrokeEnd() {
       context.showRatingResultContainer();
       context.updateRating();
+      context.beginRating = true;
       context.ratingCircleEements.controlOuterCircle.classList.remove('pulse');
       //context.ratingCircleEements.ratingTrack.classList.add('draw-stroke');
     }
@@ -197,7 +213,8 @@
       context.ratingCircleEements.cancelBtn.addEventListener("animationend", function(){
         context.ratingCircleEements.confirmBtn.classList.add('slide-up');
         context.ratingCircleEements.transparentTrack.classList.remove('draw-stroke');
-        context.hide(context.ratingCircleEements.transparentTrack);
+        //context.ratingCircleEements.transparentTrack.style.opacity = 0;
+        //context.hide(context.ratingCircleEements.transparentTrack);
       });
     }
 
@@ -205,22 +222,24 @@
      * Update rating value
      */
     function updateRating() {
-      console.log('updating');
-      this.ratingTimer = setInterval(function () {
-        var ratingContainers = [].slice.call(document.getElementsByClassName('rating-value')),
-          percentage;
+      var ratingContainers = [].slice.call(document.getElementsByClassName('rating-value')),
+        percentage;
+      update();
+      function update() {
         if (context.startingValue < context.options.max) {
           context.startingValue += context.options.step;
           percentage = ((1 - context.startingValue / context.options.max));
           context.updateRatingTrack(context.ratingCircleEements.ratingTrack, percentage);
+          if(ratingContainers.length > 0) {
+            ratingContainers.forEach(function(elem){
+              context.updateText(elem, context.startingValue);
+            });
+          }
+          context.ratingTimer = setTimeout(function () {
+            update();
+          }, context.options.interval);
         }
-        if(ratingContainers.length > 0) {
-          ratingContainers.forEach(function(elem){
-            context.updateText(elem, context.startingValue);
-          });
-        }
-
-      }, context.options.interval);
+      }
     }
 
 
@@ -228,13 +247,9 @@
       // get last offset
       var targetPathLength = this.totalTrackPathLength * percentage,
           endpoint = track.getPointAtLength(this.totalTrackPathLength * (1 - percentage));
-
-      console.log(endpoint);
       animate();
-
       // cancel this animation
       function animate() {
-        console.log('animate');
         context.trackOffset = targetPathLength;
         //context.updateHead(endpoint);
         context.animation= setTimeout(function(){
@@ -242,11 +257,6 @@
         },context.options.interval);
         clearTimeout(context.animation);
       }
-
-      // console.log(this.trackOffset);
-      // if (this.trackOffset < 0 ) {
-      //   return;
-      // }
       track.style.strokeDashoffset = this.trackOffset;
     }
 
@@ -271,10 +281,12 @@
       }
 
       if (context.ratingTimer) {
-        clearInterval(context.ratingTimer);
+        clearTimeout(context.ratingTimer);
         // pass value to scope here
       }
-      context.showConfirmationPop();
+      if (context.beginRating) {
+        context.showConfirmationPop();
+      }
     }
 
     function addAnimationClasses() {
@@ -303,7 +315,7 @@
      */
     function show(elem) {
       elem.style.display = 'block';
-      elem.style.opacity = 1;
+      //elem.style.opacity = 1;
     }
 
 

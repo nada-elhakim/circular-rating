@@ -214,30 +214,30 @@ $confirm-text-color: #666;
   0% {
     transform: scale3d(1,1,1);
   }
-  50% {
-    transform: scale3d(.9,.9,.9);
-  }
+  //50% {
+  //  transform: scale3d(.95,.95,.95);
+  //}
   100% {
-    transform: scale3d(1.02,1.02,1.02);
+    transform: scale3d(1.04,1.04,1.04);
   }
 }
 
 
 @keyframes pulse {
-    0% {
-      transform: scale3d(1,1,1);
-    }
-    50% {
-      transform: scale3d(.9,.9,.9);
-    }
-    100% {
-      transform: scale3d(1.02,1.02,1.02);
-    }
+  0% {
+    transform: scale3d(1,1,1);
+  }
+  //50% {
+  //  transform: scale3d(.95,.95,.95);
+  //}
+  100% {
+    transform: scale3d(1.04,1.04,1.04);
+  }
 }
 
 .pulse {
-  -webkit-animation: pulse .8s infinite alternate ease-in-out;
-  animation: pulse .8s infinite alternate ease-in-out;
+  -webkit-animation: pulse .5s infinite alternate ease-in-out;
+  animation: pulse .5s infinite alternate ease-in-out;
   -webkit-transform-origin: center center;
   transform-origin: center center;
 }
