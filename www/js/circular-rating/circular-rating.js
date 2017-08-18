@@ -80,6 +80,7 @@
       };
       this.scope.ratingModel = this.options.min;
       this.holdGesture = $ionicGesture.on('hold', onHold, angular.element(this.ratingCircleEements.control), {hold_timeout: 100});
+      //$ionicGesture.on('doubletap', doubleTap, angular.element(this.ratingCircleEements.control));
       $ionicGesture.on('click', confirmRating, angular.element(this.ratingCircleEements.confirmBtn));
       $ionicGesture.on('click', cancelRating, angular.element(this.ratingCircleEements.cancelBtn));
     }
@@ -185,6 +186,14 @@
       console.log('hold');
       ionic.onGesture('release', onRelease, context.ratingCircleEements.control, {});
       context.initialOnHoldEvents();
+    }
+
+    function doubleTap(e) {
+      console.log('double tap');
+      context.initialOnHoldEvents();
+      context.startingValue = context.options.max;
+      context.showConfirmationPop();
+      // Show rating with max value
     }
 
     /**
