@@ -1,6 +1,6 @@
 (function () {
-  circularRating.$inject = [];
-  function circularRating() {
+  circularRating.$inject = ['$ionicGesture'];
+  function circularRating($ionicGesture) {
     var context, holdCounter;
     /**
      * Angular directive link function
@@ -78,11 +78,10 @@
         x: this.ratingCircleEements.control.getAttribute("cx"),
         y: this.ratingCircleEements.control.getAttribute("cy")
       };
-      context.scope.ratingModel = context.options.min;
-      ionic.onGesture('hold', onHold, this.ratingCircleEements.control, {});
-      ionic.onGesture('release', onRelease, context.ratingCircleEements.control, {});
-      ionic.onGesture('click', confirmRating, this.ratingCircleEements.confirmBtn, {});
-      ionic.onGesture('click', cancelRating, this.ratingCircleEements.cancelBtn, {});
+      this.scope.ratingModel = this.options.min;
+      this.holdGesture = $ionicGesture.on('hold', onHold, angular.element(this.ratingCircleEements.control), {hold_timeout: 100});
+      $ionicGesture.on('click', confirmRating, angular.element(this.ratingCircleEements.confirmBtn));
+      $ionicGesture.on('click', cancelRating, angular.element(this.ratingCircleEements.cancelBtn));
     }
 
     /**
@@ -139,7 +138,11 @@
       context.show(context.ratingCircleEements.hintText);
       context.hide(context.ratingCircleEements.ratingResultContainer);
       context.ratingCircleEements.controlOuterCircle.classList.add('pulse');
-
+      console.log('release event here');
+      console.log(context.holdGesture);
+      $ionicGesture.off(context.holdGesture, 'hold', function(){
+        console.log('off');
+      });
     }
 
     /**
@@ -180,6 +183,7 @@
      */
     function onHold(e) {
       console.log('hold');
+      ionic.onGesture('release', onRelease, context.ratingCircleEements.control, {});
       context.initialOnHoldEvents();
     }
 
