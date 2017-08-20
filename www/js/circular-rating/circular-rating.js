@@ -93,7 +93,6 @@
       this.tap = $ionicGesture.on('tap', onDoubleTap, angular.element(this.ratingCircleEements.control));
       $ionicGesture.on('click', confirmRating, angular.element(this.ratingCircleEements.confirmBtn));
       $ionicGesture.on('click', cancelRating, angular.element(this.ratingCircleEements.cancelBtn));
-      //$ionicGesture.off(this.tap, 'tap', function(){});
       this.release = $ionicGesture.on('release', onRelease, angular.element(context.ratingCircleEements.control));
     }
     /**
@@ -125,7 +124,7 @@
     /**
      * Confirm rating and reset rating to min value
      */
-    function confirmRating() {        
+    function confirmRating() {
       context.show(context.ratingCircleEements.ratingUpdatePop);
       context.scope.ratingModel = context.startingValue;
       context.scope.$apply();
@@ -175,8 +174,13 @@
      * Initial on hold actions
      */
     function initialOnHoldEvents() {
+      this.showRatingResultContainer();
+      this.updateRating();
+      this.ratingCircleEements.controlOuterCircle.classList.remove('pulse');
+
+      //TODO: bug here in transparent track
       this.ratingCircleEements.transparentTrack.classList.add('draw-stroke');
-      this.ratingCircleEements.transparentTrack.addEventListener("animationend", onTransparentTrackDrawStrokeEnd);
+      //this.ratingCircleEements.transparentTrack.addEventListener("animationend", onTransparentTrackDrawStrokeEnd);
     }
 
     function showRatingResultContainer() {
@@ -209,7 +213,6 @@
     function onTransparentTrackDrawStrokeEnd() {
       context.showRatingResultContainer();
       context.updateRating();
-      context.beginRating = true;
       context.ratingCircleEements.controlOuterCircle.classList.remove('pulse');
     }
 
@@ -319,9 +322,9 @@
           clearTimeout(context.ratingTimer);
           // pass value to scope here
         }
-        if (context.beginRating) {
+        //if (context.beginRating) {
           context.showConfirmationPop();
-        }
+        //}
       }
     }
 
