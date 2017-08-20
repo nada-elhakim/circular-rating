@@ -90,10 +90,10 @@
     function defineGestures() {
       this.holdGesture = $ionicGesture.on('hold', onHold, angular.element(this.ratingCircleEements.control), {hold_timeout: this.options.holdTimeout});
       this.doubleTap = $ionicGesture.on('doubletap', onDoubleTap, angular.element(this.ratingCircleEements.control));
-      this.tap = $ionicGesture.on('tap', function(){}, angular.element(this.ratingCircleEements.control))
+      this.tap = $ionicGesture.on('tap', onDoubleTap, angular.element(this.ratingCircleEements.control));
       $ionicGesture.on('click', confirmRating, angular.element(this.ratingCircleEements.confirmBtn));
       $ionicGesture.on('click', cancelRating, angular.element(this.ratingCircleEements.cancelBtn));
-      $ionicGesture.off(this.tap, 'tap', function(){});
+      //$ionicGesture.off(this.tap, 'tap', function(){});
       this.release = $ionicGesture.on('release', onRelease, angular.element(context.ratingCircleEements.control));
     }
     /**
@@ -125,7 +125,8 @@
     /**
      * Confirm rating and reset rating to min value
      */
-    function confirmRating() {
+    function confirmRating() {        
+      context.show(context.ratingCircleEements.ratingUpdatePop);
       context.scope.ratingModel = context.startingValue;
       context.scope.$apply();
       context.startingValue = context.options.min;
