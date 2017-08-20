@@ -9866,8 +9866,8 @@ a.button {
     position: absolute;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%, -53%);
-    transform: translate(-50%, -53%);
+    -webkit-transform: translate3d(-50%, -53%, 0);
+    transform: translate3d(-50%, -53%, 0);
     width: 150px;
     height: 150px;
     text-align: center; }
@@ -9954,20 +9954,22 @@ a.button {
 @keyframes zoomIn {
   from {
     opacity: 0;
-    transform: translate3d(-50%, -53%, 0) scale3d(0.5, 0.5, 0.5); }
+    -webkit-transform: translate3d(-50%, -53%, 0) scale(0.5, 0.5);
+    transform: translate3d(-50%, -53%, 0) scale(0.5, 0.5); }
   to {
     opacity: 1;
-    transform: translate3d(-50%, -53%, 0) scale3d(1, 1, 1); } }
+    -webkit-transform: translate3d(-50%, -53%, 0) scale(1, 1);
+    transform: translate3d(-50%, -53%, 0) scale(1, 1); } }
 
 @-webkit-keyframes zoomIn {
   from {
     opacity: 0;
-    -webkit-transform: translate3d(-50%, -53%, 0) scale3d(0.5, 0.5, 0.5);
-    transform: translate3d(-50%, -53%, 0) scale3d(0.5, 0.5, 0.5); }
+    -webkit-transform: translate3d(-50%, -53%, 0) scale(0.5, 0.5);
+    transform: translate3d(-50%, -53%, 0) scale(0.5, 0.5); }
   to {
     opacity: 1;
-    -webkit-transform: translate3d(-50%, -53%, 0) scale3d(1, 1, 1);
-    transform: translate3d(-50%, -53%, 0) scale3d(0.5, 0.5, 0.5); } }
+    -webkit-transform: translate3d(-50%, -53%, 0) scale(1, 1);
+    transform: translate3d(-50%, -53%, 0) scale(1, 1); } }
 
 .zoom-in {
   -webkit-transform-origin: center center;
@@ -10010,16 +10012,22 @@ a.button {
 @keyframes zoomInFadeOut {
   from {
     opacity: 1;
-    transform: translate3d(-50%, -53%, 0) scale(0.8); }
+    transform: translate3d(-50%, -53%, 0) scale(0.8);
+    -webkit-transform: translate3d(-50%, -53%, 0) scale(0.8); }
   to {
     opacity: 0;
-    transform: translate3d(-50%, -53%, 0) scale(2); } }
+    transform: translate3d(-50%, -53%, 0) scale(2);
+    -webkit-transform: translate3d(-50%, -53%, 0) scale(2); } }
 
 @-webkit-keyframes zoomInFadeOut {
   from {
-    opacity: 1; }
+    opacity: 1;
+    transform: translate3d(-50%, -53%, 0) scale(0.8);
+    -webkit-transform: translate3d(-50%, -53%, 0) scale(0.8); }
   to {
-    opacity: 0; } }
+    opacity: 0;
+    transform: translate3d(-50%, -53%, 0) scale(2);
+    -webkit-transform: translate3d(-50%, -53%, 0) scale(2); } }
 
 .zoom-in-fade-out {
   -webkit-animation: zoomInFadeOut 1s ease-out forwards;
@@ -10028,12 +10036,12 @@ a.button {
 @-webkit-keyframes shrink {
   from {
     opacity: 1;
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1); }
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1); }
   to {
     opacity: 0;
-    -webkit-transform: scale3d(0.5, 0.5, 0.5);
-    transform: scale3d(0.5, 0.5, 0.5); } }
+    -webkit-transform: scale(0.5, 0.5);
+    transform: scale(0.5, 0.5); } }
 
 .shrink {
   -webkit-animation: shrink .5s ease-in forwards;

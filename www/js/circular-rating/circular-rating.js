@@ -28,11 +28,13 @@
       this.trackOffsetAnimation = null;
       // To be added later from scope
       this.options = {
-        min: 0.5,
-        max: 10,
-        interval: 250,
-        step: 0.5,
+        min: scope.min || 1,
+        max: scope.max || 10,
+        interval: scope.interval || 500,
+        step: scope.step || 1,
+        holdTimeout: scope.holdTimeout || 500
       };
+
       this.startingValue = this.options.min;
       // if(options){
       //   this.options = options;
@@ -79,10 +81,14 @@
         y: this.ratingCircleEements.control.getAttribute("cy")
       };
       this.scope.ratingModel = this.options.min;
-      this.holdGesture = $ionicGesture.on('hold', onHold, angular.element(this.ratingCircleEements.control), {hold_timeout: 100});
-      //$ionicGesture.on('doubletap', doubleTap, angular.element(this.ratingCircleEements.control));
+      this.holdGesture = $ionicGesture.on('hold', onHold, angular.element(this.ratingCircleEements.control), {hold_timeout: this.options.holdTimeout});
+      this.doubleTap = $ionicGesture.on('doubletap', doubleTap, angular.element(this.ratingCircleEements.control));
+      this.tap = $ionicGesture.on('tap', function(){}, angular.element(this.ratingCircleEements.control))
       $ionicGesture.on('click', confirmRating, angular.element(this.ratingCircleEements.confirmBtn));
       $ionicGesture.on('click', cancelRating, angular.element(this.ratingCircleEements.cancelBtn));
+      $ionicGesture.off(this.tap, 'tap', function(){});
+
+
     }
 
     /**
@@ -139,11 +145,10 @@
       context.show(context.ratingCircleEements.hintText);
       context.hide(context.ratingCircleEements.ratingResultContainer);
       context.ratingCircleEements.controlOuterCircle.classList.add('pulse');
+      context.ratingCircleEements.confirmBtn.classList.remove('slide-up');
+      context.ratingCircleEements.cancelBtn.classList.remove('slide-up');
       console.log('release event here');
       console.log(context.holdGesture);
-      $ionicGesture.off(context.holdGesture, 'hold', function(){
-        console.log('off');
-      });
     }
 
     /**
@@ -184,15 +189,17 @@
      */
     function onHold(e) {
       console.log('hold');
-      ionic.onGesture('release', onRelease, context.ratingCircleEements.control, {});
+      this.release = $ionicGesture.on('release', onRelease, angular.element(context.ratingCircleEements.control));
+      $ionicGesture.off(context.tap, 'tap', function(){});
+
       context.initialOnHoldEvents();
     }
 
     function doubleTap(e) {
       console.log('double tap');
-      context.initialOnHoldEvents();
-      context.startingValue = context.options.max;
-      context.showConfirmationPop();
+      // context.initialOnHoldEvents();
+      // context.startingValue = context.options.max;
+      // context.showConfirmationPop();
       // Show rating with max value
     }
 
@@ -218,6 +225,9 @@
       this.ratingCircleEements.confirmationPop.addEventListener("animationend", onShowConfirmation);
     }
 
+    function shrinkTrackHeads() {
+
+    }
     /**
      * On rating confirmation
      */
@@ -282,24 +292,39 @@
 
     }
 
+    function getTrackHeadCircles() {
+
+    }
+
+
+
     /**
      * On release event callback
      * @param e
      */
     function onRelease(e) {
-      //context.hide(context.ratingCircleEements.transparentTrack);
-      // Cancel time interval on button release
-      if (context.animation) {
-        clearTimeout(context.animation);
+      // Get delta time to check whether the gesture
+      // was a click or a hold
+      if (e.gesture.deltaTime < context.options.holdTimeout) {
+        console.log('from click or tap');
+        // Get full rating
+      } else {
+        console.log('from hold');
+        //context.hide(context.ratingCircleEements.transparentTrack);
+        // Cancel time interval on button release
+        if (context.animation) {
+          clearTimeout(context.animation);
+        }
+
+        if (context.ratingTimer) {
+          clearTimeout(context.ratingTimer);
+          // pass value to scope here
+        }
+        if (context.beginRating) {
+          context.showConfirmationPop();
+        }
       }
 
-      if (context.ratingTimer) {
-        clearTimeout(context.ratingTimer);
-        // pass value to scope here
-      }
-      if (context.beginRating) {
-        context.showConfirmationPop();
-      }
     }
 
     function addAnimationClasses() {
@@ -374,7 +399,11 @@
       templateUrl: 'js/circular-rating/circular-rating.html',
       restrict: 'EA',
       scope: {
-        options: '=options',
+        min: '@min',
+        max: '@max',
+        interval:'@interval',
+        step: '@step',
+        holdTimeout: '@holdTimeout',
         ratingModel:'=ratingModel'
       },
       link: link

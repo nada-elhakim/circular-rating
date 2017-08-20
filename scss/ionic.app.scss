@@ -44,8 +44,8 @@ $confirm-text-color: #666;
   position: absolute;
   top:50%;
   left: 50%;
-  -webkit-transform: translate(-50%,-53%);
-  transform: translate(-50%,-53%);
+  -webkit-transform: translate3d(-50%,-53%,0);
+  transform: translate3d(-50%,-53%,0);
   //@if $axis == vertical {
   //  -webkit-transform: translate3d(0,-50%,0);
   //  transform: translate3d(0,-50%,0);
@@ -266,24 +266,26 @@ $confirm-text-color: #666;
 @keyframes zoomIn {
   from {
     opacity: 0;
-    transform: translate3d(-50%, -53%,0) scale3d(0.5,0.5,0.5);
+    -webkit-transform: translate3d(-50%, -53%,0) scale(0.5,0.5);
+    transform: translate3d(-50%, -53%,0) scale(0.5,0.5);
   }
   to {
     opacity: 1;
-    transform: translate3d(-50%, -53%,0) scale3d(1,1,1);
+    -webkit-transform: translate3d(-50%, -53%,0) scale(1,1);
+    transform: translate3d(-50%, -53%,0) scale(1,1);
   }
 }
 
 @-webkit-keyframes zoomIn {
   from {
     opacity: 0;
-    -webkit-transform: translate3d(-50%, -53%,0) scale3d(0.5,0.5,0.5);
-    transform: translate3d(-50%, -53%,0) scale3d(0.5,0.5,0.5);
+    -webkit-transform: translate3d(-50%, -53%,0) scale(0.5,0.5);
+    transform: translate3d(-50%, -53%,0) scale(0.5,0.5);
   }
   to {
     opacity: 1;
-    -webkit-transform: translate3d(-50%, -53%,0) scale3d(1,1,1);
-    transform: translate3d(-50%, -53%,0) scale3d(0.5,0.5,0.5);
+    -webkit-transform: translate3d(-50%, -53%,0) scale(1,1);
+    transform: translate3d(-50%, -53%,0) scale(1,1);
   }
 }
 
@@ -338,6 +340,7 @@ $confirm-text-color: #666;
   from {
     opacity: 1;
     transform: translate3d(-50%, -53%,0) scale(0.8);
+    -webkit-transform: translate3d(-50%, -53%,0) scale(0.8);
     //font-size: 1rem;
     //transform: translate3d(0,0,20);
 
@@ -347,18 +350,28 @@ $confirm-text-color: #666;
     //transform: translate3d(0,0,0);
     //font-size: 4rem;
     transform: translate3d(-50%, -53%,0) scale(2);
-
+    -webkit-transform: translate3d(-50%, -53%,0) scale(2);
   }
 }
 
 @-webkit-keyframes zoomInFadeOut {
   from {
     opacity: 1;
-    //transform: translateZ(20px);
+    transform: translate3d(-50%, -53%,0) scale(0.8);
+    -webkit-transform: translate3d(-50%, -53%,0) scale(0.8);
+
+    //font-size: 1rem;
+    //transform: translate3d(0,0,20);
+
   }
   to {
     opacity: 0;
-    //transform: translateZ(200px);
+    //transform: translate3d(0,0,0);
+    //font-size: 4rem;
+    transform: translate3d(-50%, -53%,0) scale(2);
+    -webkit-transform: translate3d(-50%, -53%,0) scale(2);
+
+
   }
 }
 .zoom-in-fade-out {
@@ -371,13 +384,13 @@ $confirm-text-color: #666;
 @-webkit-keyframes shrink {
   from {
     opacity: 1;
-    -webkit-transform: scale3d(1,1,1);
-    transform: scale3d(1,1,1);
+    -webkit-transform: scale(1,1);
+    transform: scale(1,1);
   }
   to {
     opacity: 0;
-    -webkit-transform: scale3d(0.5,0.5,0.5);
-    transform: scale3d(0.5,0.5,0.5);
+    -webkit-transform: scale(0.5,0.5);
+    transform: scale(0.5,0.5);
   }
 }
 .shrink {
