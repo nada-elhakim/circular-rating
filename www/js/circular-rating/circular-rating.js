@@ -43,6 +43,7 @@
     }
 
     CircularRatingClass.prototype.init = init;
+    CircularRatingClass.prototype.defineGestures = defineGestures;
     CircularRatingClass.prototype.getRatingElements = getRatingElements;
     CircularRatingClass.prototype.initialOnHoldEvents = initialOnHoldEvents;
     CircularRatingClass.prototype.updateRating = updateRating;
@@ -62,12 +63,13 @@
     CircularRatingClass.prototype.resetTrack = resetTrack;
     CircularRatingClass.prototype.updateHead = updateHead;
     CircularRatingClass.prototype.resetWidget = resetWidget;
+    CircularRatingClass.prototype.updateRatingText = updateRatingText;
+    CircularRatingClass.prototype.getFullRating = getFullRating;
 
 
 
     function prepareTrackPath(track) {
       this.totalTrackPathLength = this.currentrackPathLength= track.getTotalLength();
-      //console.log(this.totalTrackPathLength);
       this.trackDashArray = track.style.strokeDasharray = this.totalTrackPathLength;
       this.trackOffset = track.style.strokeDashoffset = this.totalTrackPathLength;
     }
@@ -81,16 +83,19 @@
         y: this.ratingCircleEements.control.getAttribute("cy")
       };
       this.scope.ratingModel = this.options.min;
+      // Define Gestures
+      this.defineGestures();
+    }
+
+    function defineGestures() {
       this.holdGesture = $ionicGesture.on('hold', onHold, angular.element(this.ratingCircleEements.control), {hold_timeout: this.options.holdTimeout});
-      this.doubleTap = $ionicGesture.on('doubletap', doubleTap, angular.element(this.ratingCircleEements.control));
+      this.doubleTap = $ionicGesture.on('doubletap', onDoubleTap, angular.element(this.ratingCircleEements.control));
       this.tap = $ionicGesture.on('tap', function(){}, angular.element(this.ratingCircleEements.control))
       $ionicGesture.on('click', confirmRating, angular.element(this.ratingCircleEements.confirmBtn));
       $ionicGesture.on('click', cancelRating, angular.element(this.ratingCircleEements.cancelBtn));
       $ionicGesture.off(this.tap, 'tap', function(){});
-
-
+      this.release = $ionicGesture.on('release', onRelease, angular.element(context.ratingCircleEements.control));
     }
-
     /**
      * Get circular rating elements
      * @returns {{control: Element, transparentTrack: Element, ratingTrack: Element, confirmationPop: Element, ratingValue: Element, confirmBtn: Element, cancelBtn: Element}}
@@ -121,7 +126,6 @@
      * Confirm rating and reset rating to min value
      */
     function confirmRating() {
-      //context.scope.ratingModel = context.startingValue;
       context.scope.ratingModel = context.startingValue;
       context.scope.$apply();
       context.startingValue = context.options.min;
@@ -147,8 +151,6 @@
       context.ratingCircleEements.controlOuterCircle.classList.add('pulse');
       context.ratingCircleEements.confirmBtn.classList.remove('slide-up');
       context.ratingCircleEements.cancelBtn.classList.remove('slide-up');
-      console.log('release event here');
-      console.log(context.holdGesture);
     }
 
     /**
@@ -177,7 +179,6 @@
     }
 
     function showRatingResultContainer() {
-      //this.show(this.ratingCircleEements.ratingResultContainer);
       this.show(this.ratingCircleEements.ratingUpdatePop);
       this.show(this.ratingCircleEements.transparentTrack);
       this.ratingCircleEements.ratingValue.innerText = this.startingValue;
@@ -188,19 +189,17 @@
      * @param e
      */
     function onHold(e) {
-      console.log('hold');
-      this.release = $ionicGesture.on('release', onRelease, angular.element(context.ratingCircleEements.control));
-      $ionicGesture.off(context.tap, 'tap', function(){});
-
       context.initialOnHoldEvents();
     }
 
-    function doubleTap(e) {
-      console.log('double tap');
-      // context.initialOnHoldEvents();
-      // context.startingValue = context.options.max;
-      // context.showConfirmationPop();
-      // Show rating with max value
+    function onDoubleTap(e) {
+      context.getFullRating();
+      context.showConfirmationPop();
+    }
+
+    function getFullRating() {
+      context.startingValue = context.options.max;
+      context.updateRatingText();
     }
 
     /**
@@ -211,7 +210,6 @@
       context.updateRating();
       context.beginRating = true;
       context.ratingCircleEements.controlOuterCircle.classList.remove('pulse');
-      //context.ratingCircleEements.ratingTrack.classList.add('draw-stroke');
     }
 
 
@@ -236,8 +234,6 @@
       context.ratingCircleEements.cancelBtn.addEventListener("animationend", function(){
         context.ratingCircleEements.confirmBtn.classList.add('slide-up');
         context.ratingCircleEements.transparentTrack.classList.remove('draw-stroke');
-        //context.ratingCircleEements.transparentTrack.style.opacity = 0;
-        //context.hide(context.ratingCircleEements.transparentTrack);
       });
     }
 
@@ -245,19 +241,14 @@
      * Update rating value
      */
     function updateRating() {
-      var ratingContainers = [].slice.call(document.getElementsByClassName('rating-value')),
-        percentage;
+      var percentage;
       update();
       function update() {
         if (context.startingValue < context.options.max) {
           context.startingValue += context.options.step;
           percentage = ((1 - context.startingValue / context.options.max));
           context.updateRatingTrack(context.ratingCircleEements.ratingTrack, percentage);
-          if(ratingContainers.length > 0) {
-            ratingContainers.forEach(function(elem){
-              context.updateText(elem, context.startingValue);
-            });
-          }
+          context.updateRatingText();
           context.ratingTimer = setTimeout(function () {
             update();
           }, context.options.interval);
@@ -265,6 +256,14 @@
       }
     }
 
+    function updateRatingText(){
+      var ratingContainers = [].slice.call(document.getElementsByClassName('rating-value'));
+      if(ratingContainers.length > 0) {
+        ratingContainers.forEach(function(elem){
+          context.updateText(elem, context.startingValue);
+        });
+      }
+    }
 
     function updateRatingTrack(track, percentage) {
       // get last offset
@@ -306,11 +305,10 @@
       // Get delta time to check whether the gesture
       // was a click or a hold
       if (e.gesture.deltaTime < context.options.holdTimeout) {
-        console.log('from click or tap');
-        // Get full rating
+        context.startingValue = context.options.max;
+        context.updateRatingText()
+
       } else {
-        console.log('from hold');
-        //context.hide(context.ratingCircleEements.transparentTrack);
         // Cancel time interval on button release
         if (context.animation) {
           clearTimeout(context.animation);
@@ -324,7 +322,6 @@
           context.showConfirmationPop();
         }
       }
-
     }
 
     function addAnimationClasses() {
@@ -362,8 +359,6 @@
      */
     function hideConfirmationPop() {
       this.hide(this.ratingCircleEements.confirmationPop);
-      //this.hide(this.ratingCircleEements.ratingResultContainer);
-      //this.hide(this.ratingCircleEements.ratingTrack);
     }
 
     function resizeCircle(circle, percentage) {
@@ -385,7 +380,6 @@
      */
     function getFinalRating() {
       this.show(this.ratingCircleEements.ratingResultContainer);
-      //this.show(this.ratingCircleEements.ratingUpdatePop);
       this.ratingCircleEements.ratingUpdatePop.addEventListener("animationend", function(){
         context.hide(context.ratingCircleEements.ratingResultContainer);
       });
